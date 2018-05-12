@@ -55,6 +55,7 @@ public class RegistrationController {
         Employee employeeRegistration = new Employee();
         employeeRegistration.setEmployeeRoleId(100);
         employeeRegistration.setEmployeeRoleDesc("EMPLOYEE");
+        log.info("Completed setting required parameter values.");
         //Initiating ModelAndView object with the Employee object
         return new ModelAndView("registration", "employee", employeeRegistration);
     }
