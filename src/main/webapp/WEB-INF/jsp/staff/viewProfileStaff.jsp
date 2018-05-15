@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="images/favicon.ico">
-    <title>TechNumen View Profile</title>
+    <title>Employee Management App View Profile</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/external/bootstrap.min.css" rel="stylesheet">
     <link href="./css/external/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
         <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2 bg-faded sidebar-style-1">
             <h1 class="site-title">
                 <a href="/employeeManagement/dashboard">
-                    <img src="./images/technumen-logo.png" class="img-fluid">
+                    <img src="./images/company_logo.jpg" class="img-fluid">
                 </a>
             </h1>
 
@@ -227,8 +227,8 @@
                     <section class="row">
                         <br><br><br><br><br><br><br><br><br><br><br>
                         <br><br><br><br><br><br><br><br><br><br><br>
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.technumen.com/">
-                            TechNumen Inc.,</a>
+                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">
+                            Employee Management App.,</a>
                         </div>
                     </section>
                 </div>

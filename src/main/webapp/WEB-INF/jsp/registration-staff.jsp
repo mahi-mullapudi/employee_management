@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Mahidhar Mullapudi">
     <link rel="icon" href="images/favicon.ico">
     <title>Registration</title>
     <!-- Bootstrap core CSS -->
@@ -27,11 +27,11 @@
             <div class="col-sm-12">
                 <section class="row">
                     <div class="form-signin">
-                        <br><img src="images/technumen-logo.png" class="img-fluid">
+                        <br><img src="images/company_logo.jpg" class="img-fluid">
                         <hr>
                     </div>
                     <div class="col-md-12">
-                        <h4 class="subheading"> Welcome to TechNumen Inc - Timesheet App. Please create Staff Account
+                        <h4 class="subheading"> Welcome to Employee Management App - Timesheet App. Please create Staff Account
                             to get access to the Timesheet Application.
                         </h4>
                         <hr>
@@ -195,7 +195,7 @@
                         </form:form>
                         <hr>
                         <div class="form-signin">
-                            <a href="login.html">Login into your Existing TechNumen account</a>
+                            <a href="login">Login into your Existing Employee Management App account</a>
                         </div>
                     </div>
                 </section>

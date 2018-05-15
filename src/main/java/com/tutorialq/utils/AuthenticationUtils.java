@@ -1,6 +1,6 @@
 package com.tutorialq.utils;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import org.springframework.stereotype.Component;
 
 import java.security.MessageDigest;
@@ -17,7 +17,7 @@ public class AuthenticationUtils {
      * @throws Exception
      */
     public String getHashValue(String password) throws Exception {
-        String saltedPassword = TimesheetConstants.SALT + password;
+        String saltedPassword = ApplicationConstants.SALT + password;
         String hashedPassword = generateHash(saltedPassword);
 
         return hashedPassword;

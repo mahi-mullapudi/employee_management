@@ -1,6 +1,5 @@
 package com.tutorialq.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Maintains Timesheet Information.
@@ -27,12 +26,10 @@ public class Timesheet implements Serializable {
     @Column(name = "TIMESHEET_ID", unique = true, nullable = false)
     private long timesheetId;
     private String timesheetType;
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
-    private Date fromDate;
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
-    private Date toDate;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate fromDate;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate toDate;
     private String timesheetStatus;
     //Timesheet Information
     private double regularHours;
@@ -50,21 +47,20 @@ public class Timesheet implements Serializable {
     private long fileSize;
     private String dscComments;
     private String reviewerComments;
-    //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy hh:mm")
-    @Temporal(TemporalType.DATE)
-    private Date dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy hh:mm")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateLastModified;
-    @DateTimeFormat(pattern = "MM/dd/yyyy hh:mm")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateApproved;
-    private String nameCreated; //Name of the user Uploaded the timesheet.
-    private String nameLastModified;
-    private String nameApproved;
+    /* Mapping*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     @JsonIgnore
     private Employee employee;
+    //Audit Information
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateCreated;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateLastModified;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateApproved;
+    private String nameCreated; //Name of the user Uploaded the timesheet.
+    private String nameLastModified;
+    private String nameApproved;
+
 }

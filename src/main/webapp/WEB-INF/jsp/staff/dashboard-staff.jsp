@@ -9,7 +9,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="images/favicon.ico">
-    <title>TechNumen Home</title>
+    <title>Employee Management App Home</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/external/bootstrap.min.css" rel="stylesheet">
     <link href="./css/external/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
@@ -31,7 +31,7 @@
             <h1 class="site-title">
                 <a href="/employeeManagement/dashboard">
 
-                    <img src="./images/technumen-logo.png" class="img-fluid">
+                    <img src="./images/company_logo.jpg" class="img-fluid">
                 </a>
             </h1>
 
@@ -324,7 +324,7 @@
 
                     </section>
                     <section class="row">
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.technumen.com/">TechNumen
+                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee Management App
                             Inc.,</a></div>
                     </section>
                 </div>

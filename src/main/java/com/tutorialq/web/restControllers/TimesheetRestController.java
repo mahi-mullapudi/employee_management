@@ -1,6 +1,6 @@
 package com.tutorialq.web.restControllers;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.models.RestResponseEntity;
 import com.tutorialq.entities.Timesheet;
@@ -60,7 +60,7 @@ public class TimesheetRestController {
                 doc = timesheetObj.getBlobContent();
                 String extn = FilenameUtils.getExtension(timesheetObj.getDscFileName()).toLowerCase();
                 log.info("File Extension: " + extn);
-                String mimeType = TimesheetConstants.TIMESHEET_FILE_EXTENSION_MAP.get(extn);
+                String mimeType = ApplicationConstants.TIMESHEET_FILE_EXTENSION_MAP.get(extn);
                 if (StringUtils.isEmpty(mimeType) || StringUtils.isBlank(mimeType)) {
                     mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;    //Unknown file type - defaulting to stream
                 }
@@ -187,16 +187,16 @@ public class TimesheetRestController {
             Employee employeeObj = timesheetObj.getEmployee();
             timesheetService.approveTimesheet(timesheetId, reviewerName, reviewComments);
             emailService.sendPlainTextMailWithoutAttachment(
-                    TimesheetConstants.fromAddress, employeeObj.getEmployeeEmailId(), "",
+                    ApplicationConstants.fromAddress, employeeObj.getEmployeeEmailId(), "",
                     "Timesheet APPROVED for " + timesheetObj.getFromDate()
                             + " to " + timesheetObj.getToDate(),
                     "Your timesheet for the period: " + timesheetObj.getFromDate()
                             + " to " + timesheetObj.getToDate() + " is APPROVED successfully. ");
-            restResponseEntity = new RestResponseEntity(TimesheetConstants.REST_RESPONSE_CODE_SUCCESS,
+            restResponseEntity = new RestResponseEntity(ApplicationConstants.REST_RESPONSE_CODE_SUCCESS,
                     "Selected Timesheet Approved Successfully!!", "alert-success");
         } catch (Exception ex) {
             log.error("Exception while Approving Timesheet: " + ex);
-            restResponseEntity = new RestResponseEntity(TimesheetConstants.REST_RESPONSE_CODE_ERROR,
+            restResponseEntity = new RestResponseEntity(ApplicationConstants.REST_RESPONSE_CODE_ERROR,
                     "Exception while Approving the timesheet. Please contact Admin for help.",
                     "alert-danger");
         }
@@ -225,18 +225,18 @@ public class TimesheetRestController {
             Employee employeeObj = timesheetObj.getEmployee();
             timesheetService.rejectTimesheet(timesheetId, reviewerName, reviewComments);
             emailService.sendPlainTextMailWithoutAttachment(
-                    TimesheetConstants.fromAddress, employeeObj.getEmployeeEmailId(), "",
+                    ApplicationConstants.fromAddress, employeeObj.getEmployeeEmailId(), "",
                     "Timesheet REJECTED for " + timesheetObj.getFromDate()
                             + " to " + timesheetObj.getToDate(),
                     "Your timesheet for the period: " + timesheetObj.getFromDate()
                             + " to " + timesheetObj.getToDate() + " is REJECTED because of: "
                             + timesheetObj.getReviewerComments()
                             + ". Please correct your timesheet and re-submit again.");
-            restResponseEntity = new RestResponseEntity(TimesheetConstants.REST_RESPONSE_CODE_SUCCESS,
+            restResponseEntity = new RestResponseEntity(ApplicationConstants.REST_RESPONSE_CODE_SUCCESS,
                     "Selected Timesheet Disapproved Successfully", "alert-success");
         } catch (Exception ex) {
             log.error("Exception while rejecting the Timesheet: " + ex);
-            restResponseEntity = new RestResponseEntity(TimesheetConstants.REST_RESPONSE_CODE_ERROR,
+            restResponseEntity = new RestResponseEntity(ApplicationConstants.REST_RESPONSE_CODE_ERROR,
                     "Exception while Disapproving the timesheet. Please contact Admin for help.",
                     "alert-danger");
         }

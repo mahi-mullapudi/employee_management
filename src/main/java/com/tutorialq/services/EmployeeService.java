@@ -1,6 +1,10 @@
 package com.tutorialq.services;
 
+import com.tutorialq.entities.ClientDetails;
 import com.tutorialq.entities.Employee;
+import com.tutorialq.entities.ImmigrationDetails;
+
+import java.util.Optional;
 
 public interface EmployeeService {
 
@@ -11,7 +15,7 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    public Employee getEmployeeByEmployeeId(long employeeId) throws Exception;
+    Employee getEmployeeByEmployeeId(long employeeId) throws Exception;
 
     /**
      * Returns true if the email already exist for an active Employee record.
@@ -20,5 +24,26 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    public boolean checkIfEmployeeIdExists(String emailAddress) throws Exception;
+    boolean checkIfEmployeeIdExists(String emailAddress) throws Exception;
+
+
+    /**
+     * Returns ClientDetails object for a given clientDetailsId object.
+     */
+    Optional<ClientDetails> getClientDetails(long clientDetailsId) throws Exception;
+
+    /**
+     * Save Client Details.
+     *
+     * @throws Exception
+     */
+    void saveClientDetails(ClientDetails clientDetails) throws Exception;
+
+    /**
+     * Save Immigration Details.
+     *
+     * @param immigrationDetails
+     * @throws Exception
+     */
+    void saveImmigrationDetails(ImmigrationDetails immigrationDetails) throws Exception;
 }

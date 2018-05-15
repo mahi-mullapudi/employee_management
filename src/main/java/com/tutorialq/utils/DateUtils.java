@@ -113,6 +113,23 @@ public class DateUtils implements Serializable {
     }
 
     /**
+     * Returns java.time LocalDate weekend date (Sunday) for a given date by taking in the .
+     *
+     * @return
+     */
+    public static LocalDate getLocalTimesheetWeekStartDateByLocalDate(LocalDate inputDate) {
+        log.info("Inside getLocalTimesheetWeekStartDate :: inputDate: " + inputDate);
+        if (inputDate != null) {
+            LocalDate firstMonday = inputDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+            log.info("Inside inputDate not null loop, firstMonday: " + firstMonday);
+            return firstMonday;
+        } else {
+            log.error("Input date not found. So returning null.");
+            return null;
+        }
+    }
+
+    /**
      * Returns java.util weekend date (Sunday) for a given date.
      *
      * @return
@@ -139,7 +156,25 @@ public class DateUtils implements Serializable {
         log.info("Inside getLocalTimesheetWeekEndDate :: inputDate: " + inputDate);
         if (inputDate != null) {
             LocalDate localDate = inputDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            log.info("localDate: " + inputDate);
             LocalDate lastSunday = localDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+            log.info("Inside inputDate not null loop, lastSunday: " + lastSunday);
+            return lastSunday;
+        } else {
+            log.error("Input date not found. So returning null.");
+            return null;
+        }
+    }
+
+    /**
+     * Returns java.time LocalDate weekend date (Sunday) for a given local date.
+     *
+     * @return
+     */
+    public static LocalDate getLocalTimesheetWeekEndDateByLocalDate(LocalDate inputDate) {
+        log.info("Inside getLocalTimesheetWeekEndDate :: inputDate: " + inputDate);
+        if (inputDate != null) {
+            LocalDate lastSunday = inputDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
             log.info("Inside inputDate not null loop, lastSunday: " + lastSunday);
             return lastSunday;
         } else {

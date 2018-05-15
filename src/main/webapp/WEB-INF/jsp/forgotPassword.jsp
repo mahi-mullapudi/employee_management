@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Mahidhar Mullapudi">
     <link rel="icon" href="images/favicon.ico">
     <title>Login</title>
     <!-- Bootstrap core CSS -->
@@ -27,7 +27,7 @@
     <main class="col-md-12">
         <section>
             <div class="form-signin">
-                <br><img src="images/technumen-logo.png" class="img-fluid">
+                <br><img src="images/company_logo.jpg" class="img-fluid">
                 <hr>
             </div>
 
