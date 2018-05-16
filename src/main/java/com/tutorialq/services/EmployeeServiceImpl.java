@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
@@ -35,9 +33,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<ClientDetails> getClientDetails(long clientDetailsId) throws Exception {
+    public ClientDetails getClientDetails(long clientDetailsId) throws Exception {
         log.info("Inside getClientDetails method of EmployeeServiceImpl:: clientDetailsId: " + clientDetailsId);
-        return clientRepository.findById(clientDetailsId);
+        return clientRepository.findById(clientDetailsId).orElse(new ClientDetails());
     }
 
     @Override
@@ -47,11 +45,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public ImmigrationDetails getImmigrationDetails(long immigrationDetailsId) throws Exception {
+        log.info("Inside the getImmigrationDetails method of EmployeeServiceImpl");
+        return immigrationRepository.findById(immigrationDetailsId).orElse(new ImmigrationDetails());
+    }
+
+    @Override
     public void saveImmigrationDetails(ImmigrationDetails immigrationDetails) throws Exception {
         log.info("Inside the saveImmigrationDetails method of EmployeeServiceImpl");
         immigrationRepository.save(immigrationDetails);
     }
-
 
 }
 

@@ -91,4 +91,16 @@ public class ApplicationConstants implements Serializable {
             .put("training", "Training")
             .build();
 
+    public static final Map<String, String> paymentTermsMap = ImmutableMap.<String, String>builder()
+            .put("net30", "Net 30")
+            .put("net45", "Net 45")
+            .put("net60", "Net 60")
+            .build();
+
+    public static final Map<String, String> invoiceFrequencyMap = ImmutableMap.<String, String>builder()
+            .put("weekly", "Weekly")
+            .put("biweekly", "Bi-weekly")
+            .put("monthly", "Monthly")
+            .build();
+
 }

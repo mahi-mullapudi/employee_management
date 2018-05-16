@@ -4,8 +4,6 @@ import com.tutorialq.entities.ClientDetails;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.ImmigrationDetails;
 
-import java.util.Optional;
-
 public interface EmployeeService {
 
     /**
@@ -30,7 +28,15 @@ public interface EmployeeService {
     /**
      * Returns ClientDetails object for a given clientDetailsId object.
      */
-    Optional<ClientDetails> getClientDetails(long clientDetailsId) throws Exception;
+    ClientDetails getClientDetails(long clientDetailsId) throws Exception;
+
+    /**
+     * Returns ImmigrationDetails object for a given Immigration Details Id.
+     *
+     * @return
+     * @throws Exception
+     */
+    ImmigrationDetails getImmigrationDetails(long immigrationDetailsId) throws Exception;
 
     /**
      * Save Client Details.

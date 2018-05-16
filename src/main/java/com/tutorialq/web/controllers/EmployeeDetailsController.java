@@ -97,7 +97,7 @@ public class EmployeeDetailsController {
         log.info("Inside getClientDetails method of EmployeeDetails Controller:: empId: " + empId);
         Employee employee = employeeService.getEmployeeByEmployeeId(empId);
         model.addAttribute("employeeDetails", employee);
-        model.addAttribute("clientDetails", employee.getClientDetails());
+        model.addAttribute("clientDetails", employeeService.getClientDetails(empId));
         return "clientDetails";
     }
 
@@ -112,7 +112,6 @@ public class EmployeeDetailsController {
             model.addAttribute("msg", "Invalid / Missing Information. Please correct the information entered below!!");
             return "clientDetails";
         }
-        log.info("The form has no errors, so persisting the data.");
         try {
             log.info("Saving the registration details of the Employee.");
             employeeService.saveClientDetails(clientDetails);
@@ -182,6 +181,16 @@ public class EmployeeDetailsController {
     @ModelAttribute("empTypeMap")
     public Map<String, String> empTypeMap() {
         return ApplicationConstants.empTypeMap;
+    }
+
+    @ModelAttribute("paymentTermsMap")
+    public Map<String, String> paymentTermsMap() {
+        return ApplicationConstants.paymentTermsMap;
+    }
+
+    @ModelAttribute("invoiceFrequencyMap")
+    public Map<String, String> invoiceFrequencyMap() {
+        return ApplicationConstants.invoiceFrequencyMap;
     }
 
 }
