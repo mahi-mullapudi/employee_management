@@ -1,6 +1,6 @@
 package com.tutorialq.entities;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,48 +39,64 @@ public class Employee implements Serializable {
     private String employeeFullName;
     private String employeeMiddleName;
     private String employeeTitle; //Description of the Employee Title.
-    private int employeeRoleId; //Foreign Reference for Employee_Roles table.
+    private Integer employeeRoleId; //Foreign Reference for Employee_Roles table.
     private String employeeRoleDesc;
     private String employeePhone;
     private String employeePhoneExt;
-    private String clientName; //Name of the Client.
-    private String clientAddress;//Address of the Client.
-    private String clientCity;
-    private String clientState;
-    private String clientZip;
-    private long departmentId;//Primary key of Department table.
-    private String departmentName;
+    private String skillSet;
+    private String companyName;
+    private String employmentType;
+    private String referredBy;
+    private Integer currentSalaryPerc;
+    private Integer salaryDiscount;
+
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @Temporal(TemporalType.DATE)
-    private Date employeeStartDate; //Account Created Date.
+    private LocalDate employmentStartDate;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate employeeStartDate; //Account Created Date.
     private String accountStatusFlag; //Flag to check if the account is ACTIVE or INACTIVE.
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateInactivated;
+    private LocalDate dateInactivated;
     private String nameUserInactivated; // Who inactivated this user
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    private String nameUserCreated;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private Set<Timesheet> timesheetRecords = new HashSet<>(0);
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private Set<ClientDetails> clientDetails = new HashSet<>(0);
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private Set<DocumentUpload> documentUploads = new HashSet<>(0);
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private Set<ImmigrationDetails> immigrationDetails = new HashSet<>(0);
 
     public String getEmployeeFullName() {
         return (StringUtils.isNotBlank(this.employeeFirstName) ? this.employeeFirstName : "") +
                 " " + (StringUtils.isNotBlank(this.employeeLastName) ? this.employeeLastName : "");
     }
 
+    //Audit Information
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateCreated;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateLastModified;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateApproved;
+    private String nameCreated;
+    private String nameLastModified;
+    private String nameApproved;
+
     public boolean isEmployeeRole() {
-        return this.employeeRoleId == TimesheetConstants.USER_ROLE_EMPLOYEE_ID;
+        return this.employeeRoleId == ApplicationConstants.USER_ROLE_EMPLOYEE_ID;
     }
 
     public boolean isSupervisorRole() {
-        return this.employeeRoleId == TimesheetConstants.USER_ROLE_SUPERVISOR_ID;
+        return this.employeeRoleId == ApplicationConstants.USER_ROLE_SUPERVISOR_ID;
     }
 
     public boolean isAdminRole() {
-        return this.employeeRoleId == TimesheetConstants.USER_ROLE_ADMIN_ID;
+        return this.employeeRoleId == ApplicationConstants.USER_ROLE_ADMIN_ID;
     }
 
 }

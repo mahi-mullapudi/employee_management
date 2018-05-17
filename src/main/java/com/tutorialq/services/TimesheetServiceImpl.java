@@ -1,6 +1,6 @@
 package com.tutorialq.services;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.Timesheet;
 import com.tutorialq.repositories.TimesheetRepository;
@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -55,11 +56,11 @@ public class TimesheetServiceImpl implements TimesheetService {
     public void approveTimesheet(long timesheetId, String reviewerName, String reviewComments) throws Exception {
         log.info("Inside approveTimesheet method of TimesheetServiceImpl, timesheetId :: " + timesheetId);
         Timesheet timesheetObj = timesheetRepository.findById(timesheetId).get();
-        timesheetObj.setTimesheetStatus(TimesheetConstants.TIMESHEET_STATUS_APPROVED);
-        timesheetObj.setDateApproved(new Date());
+        timesheetObj.setTimesheetStatus(ApplicationConstants.TIMESHEET_STATUS_APPROVED);
+        timesheetObj.setDateApproved(LocalDate.now());
         timesheetObj.setNameApproved(reviewerName);
         timesheetObj.setReviewerComments(reviewComments);
-        timesheetObj.setDateLastModified(new Date());
+        timesheetObj.setDateLastModified(LocalDate.now());
         timesheetObj.setNameLastModified(reviewerName);
         //Updating the Timesheet object with necessary information.
         timesheetRepository.save(timesheetObj);
@@ -70,11 +71,11 @@ public class TimesheetServiceImpl implements TimesheetService {
         log.info("Inside rejectTimesheet method of TimesheetServiceImpl, timesheetId :: "
                 + timesheetId + " reviewerComments: " + reviewComments);
         Timesheet timesheetObj = timesheetRepository.findById(timesheetId).get();
-        timesheetObj.setTimesheetStatus(TimesheetConstants.TIMESHEET_STATUS_REJECTED);
+        timesheetObj.setTimesheetStatus(ApplicationConstants.TIMESHEET_STATUS_REJECTED);
         timesheetObj.setDateApproved(null);
         timesheetObj.setNameApproved("");
         timesheetObj.setReviewerComments(reviewComments);
-        timesheetObj.setDateLastModified(new Date());
+        timesheetObj.setDateLastModified(LocalDate.now());
         timesheetObj.setNameLastModified(reviewerName);
         //Updating the Timesheet object with necessary information.
         timesheetRepository.save(timesheetObj);

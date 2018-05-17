@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 @Component
 @Slf4j
-public class RegistrationValidator implements Validator {
+public class EmployeeDetailsValidator implements Validator {
 
     @Autowired
     EmailValidator emailValidator;
@@ -43,48 +43,42 @@ public class RegistrationValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeFirstName", "NotEmpty.registration.fname");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeLastName", "NotEmpty.registration.lname");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeEmailId", "NotEmpty.registration.email");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "empPassword", "NotEmpty.registration.password");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "empPassword2", "NotEmpty.registration.confirm.password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "skillSet", "NotEmpty.registration.skillSet");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyName", "NotEmpty.registration.companyName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employmentType", "NotEmpty.registration.employmentType");
 
-        Employee employeeRegistration = (Employee) target;
+        Employee employeeDetails = (Employee) target;
 
         //Email Validation
-        if (emailValidator.validate(employeeRegistration.getEmployeeEmailId())) {
-            //Check if the Email Id has a linked account.
+        if (!emailValidator.validate(employeeDetails.getEmployeeEmailId())) {
+            errors.rejectValue("employeeEmailId", "NotValid.registration.email");
+        } else {
+            //Check if the Email Id has an already associated linked account.
             try {
-                if (employeeService.checkIfEmployeeIdExists(employeeRegistration.getEmployeeEmailId())) {
-                    log.info("Duplicate Email");
+                if (employeeService.checkIfEmployeeIdExists(employeeDetails.getEmployeeEmailId())) {
                     errors.rejectValue("employeeEmailId", "Duplicate.registration.email");
                 }
             } catch (Exception ex) {
                 log.error("Exception while checking if the email id already exist:: ");
                 errors.rejectValue("employeeEmailId", "Error.checking.registration.email");
             }
-
-        } else {
-            errors.rejectValue("employeeEmailId", "NotValid.registration.email");
         }
 
-        if (StringUtils.isNotBlank(employeeRegistration.getEmpPassword())) {
-            if (!passwordValidator.validate(employeeRegistration.getEmpPassword())) {
-                errors.rejectValue("empPassword", "NotValid.registration.password");
-            } else {
-                if (!StringUtils.equalsIgnoreCase(employeeRegistration.getEmpPassword(), employeeRegistration.getEmpPassword2())) {
-                    errors.rejectValue("empPassword2", "NotValid.registration.confirm.password");
-                }
-            }
-        }
-
-        if (StringUtils.isBlank(employeeRegistration.getEmployeePhone())) {
-            errors.rejectValue("phoneNumber", "NotEmpty.registration.phoneNum");
-        } else {
-            String phoneNumber = employeeRegistration.getEmployeePhone().replaceAll("[()-]", "");
+        if (!StringUtils.isBlank(employeeDetails.getEmployeePhone())) {
+            String phoneNumber = employeeDetails.getEmployeePhone().replaceAll("[()-]", "");
             pattern = Pattern.compile(PHONE_PATTERN);
             matcher = pattern.matcher(phoneNumber);
             if (!matcher.matches()) {
                 errors.rejectValue("phoneNumber", "NotValid.registration.phoneNum");
             }
+        } else {
+            errors.rejectValue("phoneNumber", "NotEmpty.registration.phoneNum");
         }
+
+        if (employeeDetails.getEmployeeStartDate() == null) {
+            errors.rejectValue("employeeStartDate", "NotEmpty.registration.employeeStartDate");
+        }
+
 
     }
 }

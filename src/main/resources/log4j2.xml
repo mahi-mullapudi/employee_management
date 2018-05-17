@@ -12,7 +12,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.technumen" level="info"/>
+        <Logger name="com.Employee Management App" level="info"/>
 
         <Root level="info">
             <AppenderRef ref="STDOUT"/>

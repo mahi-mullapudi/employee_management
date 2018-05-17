@@ -1,6 +1,6 @@
 package com.tutorialq.utils;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,7 @@ public class FileNameUtils {
     public boolean validFileSize(long fileSize) {
         log.info("Inside validFileSize() method of FileNameUtils");
         //Check if the File size is less than or equal to 5MB
-        boolean validFlag = (fileSize <= Long.parseLong(TimesheetConstants.MAX_UPLOAD_FILE_SIZE));
+        boolean validFlag = (fileSize <= Long.parseLong(ApplicationConstants.MAX_UPLOAD_FILE_SIZE));
         log.info("validFlag: " + validFlag);
         return validFlag;
     }

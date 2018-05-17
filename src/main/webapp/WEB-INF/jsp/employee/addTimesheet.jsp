@@ -11,11 +11,11 @@
 
     <meta name="description" content="">
 
-    <meta name="author" content="">
+    <meta name="author" content="Mahidhar Mullapudi">
 
     <link rel="icon" href="images/favicon.ico">
 
-    <title>TechNumen Add Timesheets</title>
+    <title>Employee Management App Add Timesheets</title>
 
     <link href="./css/external/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
             <h1 class="site-title">
                 <a href="index.html">
 
-                    <img src="./images/technumen-logo.png" class="img-fluid">
+                    <img src="./images/company_logo.jpg" class="img-fluid">
                 </a>
             </h1>
 
@@ -358,7 +358,7 @@
                     </section>
 
                     <section class="row">
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.technumen.com/">TechNumen
+                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee Management App
                             Inc.,</a></div>
                     </section>
                 </div>

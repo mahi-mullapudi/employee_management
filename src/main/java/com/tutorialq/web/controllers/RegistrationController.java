@@ -1,6 +1,6 @@
 package com.tutorialq.web.controllers;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.models.ResetPassword;
 import com.tutorialq.services.AuthenticationService;
@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -64,8 +64,8 @@ public class RegistrationController {
     public ModelAndView getStaffRegistration(ModelMap modelMap) {
         log.info("Inside getStaffRegistration method of Registration Controller.");
         Map<Integer, String> roleIdDescMap = new TreeMap<>();
-        roleIdDescMap.put(TimesheetConstants.USER_ROLE_SUPERVISOR_ID, TimesheetConstants.USER_ROLE_SUPERVISOR);
-        roleIdDescMap.put(TimesheetConstants.USER_ROLE_ADMIN_ID, TimesheetConstants.USER_ROLE_ADMIN);
+        roleIdDescMap.put(ApplicationConstants.USER_ROLE_SUPERVISOR_ID, ApplicationConstants.USER_ROLE_SUPERVISOR);
+        roleIdDescMap.put(ApplicationConstants.USER_ROLE_ADMIN_ID, ApplicationConstants.USER_ROLE_ADMIN);
 
         modelMap.addAttribute("roleIdDescMap", roleIdDescMap);
         modelMap.addAttribute("employee", new Employee());
@@ -86,14 +86,14 @@ public class RegistrationController {
 
         log.info("The form has no errors, so persisting the data.");
         try {
-            employeeRegistration.setAccountStatusFlag(TimesheetConstants.REGISTRATION_STATUS_ACTIVE);
-            employeeRegistration.setDateCreated(new Date());
-            employeeRegistration.setNameUserCreated(employeeRegistration.getEmployeeFullName());
+            employeeRegistration.setAccountStatusFlag(ApplicationConstants.REGISTRATION_STATUS_ACTIVE);
+            employeeRegistration.setDateCreated(LocalDate.now());
+            employeeRegistration.setNameCreated(employeeRegistration.getEmployeeFullName());
             log.info("Saving the registration details of the Employee.");
             registrationService.saveRegistrationDetails(employeeRegistration);
-            emailService.sendPlainTextMailWithoutAttachment(TimesheetConstants.fromAddress, employeeRegistration.getEmployeeEmailId(),
+            emailService.sendPlainTextMailWithoutAttachment(ApplicationConstants.fromAddress, employeeRegistration.getEmployeeEmailId(),
                     "",
-                    "TechNumen Inc., Time sheet Application - Registration Successful",
+                    "Employee Management - Registration Successful",
                     "This is to confirm that you have successfully created your profile.");
 
             status.setComplete();
@@ -149,9 +149,9 @@ public class RegistrationController {
             return new ModelAndView("forgotPassword");
         }
         //Send an Email with the temporary password.
-        emailService.sendPlainTextMailWithoutAttachment(TimesheetConstants.fromAddress, resetPassword.getEmailId(),
+        emailService.sendPlainTextMailWithoutAttachment(ApplicationConstants.fromAddress, resetPassword.getEmailId(),
                 "",
-                "TechNumen Inc., Time sheet Application - Password Reset",
+                "Employee Management - Password Reset",
                 "We got a request to Reset your password. Below is the temporary password: "
                         + tempPassword + ". Please use this temporary password to Login to your account and then " +
                         "you can change your password from the Settings section.");
@@ -211,9 +211,9 @@ public class RegistrationController {
             status.setComplete();
             model.addAttribute("confirmationModal", "yes");
             //Send a confirmation Email.
-            emailService.sendPlainTextMailWithoutAttachment(TimesheetConstants.fromAddress, employee.getEmployeeEmailId(),
+            emailService.sendPlainTextMailWithoutAttachment(ApplicationConstants.fromAddress, employee.getEmployeeEmailId(),
                     "",
-                    "TechNumen Inc., Time sheet Application - Updated Profile Information",
+                    "Employee Management - Updated Profile Information",
                     "This is to confirm that we have successfully updated your profile information.");
             return new ModelAndView("employee/viewProfile");
 
@@ -233,9 +233,9 @@ public class RegistrationController {
             }
             status.setComplete();
             model.addAttribute("confirmationModal", "yes");
-            emailService.sendPlainTextMailWithoutAttachment(TimesheetConstants.fromAddress, employee.getEmployeeEmailId(),
+            emailService.sendPlainTextMailWithoutAttachment(ApplicationConstants.fromAddress, employee.getEmployeeEmailId(),
                     "",
-                    "TechNumen Inc., Time sheet Application - Updated Profile Information",
+                    "Employee Management - Updated Profile Information",
                     "This is to confirm that we have successfully updated your profile information.");
             return new ModelAndView("staff/viewProfileStaff");
 
@@ -286,9 +286,9 @@ public class RegistrationController {
         }
         status.setComplete();
         //Send a confirmation Email.
-        emailService.sendPlainTextMailWithoutAttachment(TimesheetConstants.fromAddress, employee.getEmployeeEmailId(),
+        emailService.sendPlainTextMailWithoutAttachment(ApplicationConstants.fromAddress, employee.getEmployeeEmailId(),
                 "",
-                "TechNumen Inc., Time sheet Application - Password updated",
+                "Employee Management - Password updated",
                 "This is to let you know that your password is updated successfully.");
         return new ModelAndView("updatePassword");
 

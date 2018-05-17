@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class TimesheetConstants implements Serializable {
+public class ApplicationConstants implements Serializable {
 
-    public static final String SALT = "technumen"; //Key used for Encryption.
+    public static final String SALT = "employeeManagement"; //Key used for Encryption.
 
     public static final String REGISTRATION_STATUS_ACTIVE = "ACTIVE";
 
@@ -42,6 +42,8 @@ public class TimesheetConstants implements Serializable {
 
     public static final String TIMESHEET_TYPE_BIWEEKLY = "BIWEEKLY";
 
+    public static final String TIMESHEET_TYPE_MONTHLY = "MONTHLY";
+
     public static final String REST_RESPONSE_CODE_SUCCESS = "SUCCESS";
 
     public static final String REST_RESPONSE_CODE_ERROR = "ERROR";
@@ -65,5 +67,40 @@ public class TimesheetConstants implements Serializable {
     public static final String MAX_UPLOAD_FILE_SIZE = "1000000"; // 5MB file limit.
 
     public static final String fromAddress = "admin@tutorialq.com";
+
+    public static final Map<String, String> skillMap = ImmutableMap.<String, String>builder()
+            .put("java", "Java")
+            .put("mule", "Mule Soft")
+            .put("net", ".Net")
+            .put("servicenow", "Service Now")
+            .put("qa", "Quality Assurance")
+            .put("ba", "Business Analyst")
+            .build();
+    public static final Map<String, String> companyNamesMap = ImmutableMap.<String, String>builder()
+            .put("geeksoft", "Geeksoft LLC.,")
+            .put("datasols", "DataSols LLC.,")
+            .put("anjs", "ANJS Tech")
+            .put("eish", "EISH Technologies")
+            .build();
+
+    public static final Map<String, String> empTypeMap = ImmutableMap.<String, String>builder()
+            .put("client", "Client Project")
+            .put("inhouse", "Inhouse Project")
+            .put("marketing", "Marketing")
+            .put("bench", "Bench")
+            .put("training", "Training")
+            .build();
+
+    public static final Map<String, String> paymentTermsMap = ImmutableMap.<String, String>builder()
+            .put("net30", "Net 30")
+            .put("net45", "Net 45")
+            .put("net60", "Net 60")
+            .build();
+
+    public static final Map<String, String> invoiceFrequencyMap = ImmutableMap.<String, String>builder()
+            .put("weekly", "Weekly")
+            .put("biweekly", "Bi-weekly")
+            .put("monthly", "Monthly")
+            .build();
 
 }

@@ -1,6 +1,6 @@
 package com.tutorialq.web.controllers;
 
-import com.tutorialq.constants.TimesheetConstants;
+import com.tutorialq.constants.ApplicationConstants;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.Timesheet;
 import com.tutorialq.services.EmailService;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -89,18 +90,18 @@ public class TimesheetController {
             log.info("Name: " + file.getName() + " File type: " + file.getContentType() +
                     " Size: " + file.getSize() + " Original Name: " + file.getOriginalFilename());
             //Set the fromDate based on the selected end date of the week.
-            timesheetObj.setFromDate(DateUtils.getTimesheetWeekStartDate(timesheetObj.getToDate()));
+            timesheetObj.setFromDate(DateUtils.getLocalTimesheetWeekStartDateByLocalDate(timesheetObj.getToDate()));
             timesheetObj.setEmployeeName(employee.getEmployeeFullName());
-            timesheetObj.setClientName(employee.getClientName());
+            //timesheetObj.setClientName(employee.getClientName());
             //File Upload information
             timesheetObj.setBlobContent(file.getBytes());
             timesheetObj.setFileSize(file.getSize());
             timesheetObj.setDscFileName(file.getOriginalFilename());
-            timesheetObj.setTimesheetStatus(TimesheetConstants.TIMESHEET_STATUS_SUBMITTED);
-            timesheetObj.setTimesheetType(TimesheetConstants.TIMESHEET_TYPE_WEEKLY);
+            timesheetObj.setTimesheetStatus(ApplicationConstants.TIMESHEET_STATUS_SUBMITTED);
+            timesheetObj.setTimesheetType(ApplicationConstants.TIMESHEET_TYPE_WEEKLY);
             timesheetObj.setNameCreated(employee.getEmployeeFullName());
             timesheetObj.setEmployee(employee);
-            timesheetObj.setDateCreated(new Date());
+            timesheetObj.setDateCreated(LocalDate.now());
 
             timesheetValidator.validate(timesheetObj, result);
             //Check if the Add Time sheet form information has errors.
