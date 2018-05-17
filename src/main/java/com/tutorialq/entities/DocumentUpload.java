@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -42,12 +41,12 @@ public class DocumentUpload implements Serializable {
     @JsonIgnore
     private DocumentRefData documentRefData;
     //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateLastModified;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateApproved;
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
+    private LocalDateTime dateApproved;
     private String nameCreated;
     private String nameLastModified;
     private String nameApproved;

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,13 +33,13 @@ public class TimesheetServiceImpl implements TimesheetService {
     }
 
     @Override
-    public Timesheet getTimesheetByEndDate(Date endDate, Employee employee) throws Exception {
+    public Timesheet getTimesheetByEndDate(LocalDate endDate, Employee employee) throws Exception {
         log.info("Inside getTimesheetByEndDate method of TimesheetServiceImpl :: endDate: " + endDate);
         return timesheetRepository.findTimesheetByToDateAndEmployee(endDate, employee);
     }
 
     @Override
-    public List<Timesheet> getTimesheetSummaryStaff(Date fromDate, Date toDate, String timesheetStatus) throws Exception {
+    public List<Timesheet> getTimesheetSummaryStaff(LocalDate fromDate, LocalDate toDate, String timesheetStatus) throws Exception {
         log.info("Inside getTimesheetSummaryStaff method of TimesheetServiceImpl :: fromDate: " + fromDate +
                 "toDate: " + toDate + " timesheetStatus: " + timesheetStatus);
         if (StringUtils.isBlank(timesheetStatus) || StringUtils.equalsIgnoreCase(timesheetStatus, "ALL")) {

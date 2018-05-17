@@ -48,12 +48,12 @@ public class ClientDetails implements Serializable {
     @JsonIgnore
     private Employee employee;
     //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateLastModified;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateApproved;
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
+    private LocalDateTime dateApproved;
     private String nameCreated;
     private String nameLastModified;
     private String nameApproved;

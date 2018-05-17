@@ -5,7 +5,7 @@ import com.tutorialq.entities.Timesheet;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -17,7 +17,7 @@ public interface TimesheetRepository extends CrudRepository<Timesheet, Long> {
      * @param endDate
      * @return
      */
-    public Timesheet findTimesheetByToDateAndEmployee(Date endDate, Employee employee);
+    public Timesheet findTimesheetByToDateAndEmployee(LocalDate endDate, Employee employee);
 
     /**
      * Returns the list of Timesheets based on the Start Date and End Date.
@@ -26,7 +26,7 @@ public interface TimesheetRepository extends CrudRepository<Timesheet, Long> {
      * @param toDate
      * @return
      */
-    public List<Timesheet> findTimesheetsByFromDateGreaterThanEqualAndToDateLessThanEqual(Date fromDate, Date toDate);
+    public List<Timesheet> findTimesheetsByFromDateGreaterThanEqualAndToDateLessThanEqual(LocalDate fromDate, LocalDate toDate);
 
     /**
      * Returns the list of Timesheets based on the Start Date, End Date and Timesheet Status.
@@ -37,5 +37,5 @@ public interface TimesheetRepository extends CrudRepository<Timesheet, Long> {
      * @return
      */
     public List<Timesheet> findTimesheetsByFromDateGreaterThanEqualAndToDateLessThanEqualAndTimesheetStatus
-    (Date fromDate, Date toDate, String timesheetStatus);
+    (LocalDate fromDate, LocalDate toDate, String timesheetStatus);
 }

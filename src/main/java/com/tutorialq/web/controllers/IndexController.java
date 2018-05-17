@@ -9,10 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
+import java.time.LocalDate;
 
 /*
-*   Maintains methods for basic functions.
+ *   Maintains methods for basic functions.
  */
 @Controller
 @Slf4j
@@ -21,7 +21,7 @@ public class IndexController {
     @GetMapping("/welcome")
     public String Welcome(Model model) {
         log.info("Inside welcome method of IndexController");
-        model.addAttribute("time", new Date());
+        model.addAttribute("time", LocalDate.now());
         model.addAttribute("message", "Hello Mahidhar");
         return "welcome";
     }

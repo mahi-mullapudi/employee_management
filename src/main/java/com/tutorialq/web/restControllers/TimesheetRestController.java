@@ -2,8 +2,8 @@ package com.tutorialq.web.restControllers;
 
 import com.tutorialq.constants.ApplicationConstants;
 import com.tutorialq.entities.Employee;
-import com.tutorialq.models.RestResponseEntity;
 import com.tutorialq.entities.Timesheet;
+import com.tutorialq.models.RestResponseEntity;
 import com.tutorialq.services.EmailService;
 import com.tutorialq.services.EmployeeService;
 import com.tutorialq.services.TimesheetService;
@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -128,8 +129,9 @@ public class TimesheetRestController {
      * @throws Exception
      */
     @GetMapping(value = "/getTimesheetByEndDate")
-    public ResponseEntity<Timesheet> getTimesheetByEndDate(@RequestParam("endDate") Date endDate,
-                                                           @RequestParam("employeeId") long employeeId)
+    public ResponseEntity<Timesheet> getTimesheetByEndDate(
+            @RequestParam("endDate") @DateTimeFormat(pattern = "MM/dd/yyyy") LocalDate endDate,
+            @RequestParam("employeeId") long employeeId)
             throws Exception {
         log.info("Inside getTimesheetByEndDate method of TimesheetRestController:: endDate: " + endDate
                 + "employeeId: " + employeeId);
@@ -153,7 +155,7 @@ public class TimesheetRestController {
      * @throws Exception
      */
     @GetMapping("/timesheetSummaryStaff")
-    public ResponseEntity<Timesheet> getTimesheetSummaryStaff(@RequestParam("fromDate") Date fromDate, @RequestParam("toDate") Date toDate,
+    public ResponseEntity<Timesheet> getTimesheetSummaryStaff(@RequestParam("fromDate") LocalDate fromDate, @RequestParam("toDate") LocalDate toDate,
                                                               @RequestParam("timesheetStatus") String timesheetStatus) throws Exception {
         log.info("Inside getTimesheetSummaryStaff method of Timesheet Rest Controller:: fromDate: " + fromDate +
                 " toDate: " + toDate + " timesheetStatus: " + timesheetStatus);
@@ -176,9 +178,9 @@ public class TimesheetRestController {
      * @throws Exception
      */
     @GetMapping("/approveTimesheet")
-    public ResponseEntity<RestResponseEntity> approveTimesheet(@RequestParam("timesheetId") long timesheetId,
-                                                               @RequestParam("reviewerName") String reviewerName,
-                                                               @RequestParam("reviewComments") String reviewComments)
+    public ResponseEntity<RestResponseEntity> approveTimesheet(
+            @RequestParam("timesheetId") long timesheetId, @RequestParam("reviewerName") String reviewerName,
+            @RequestParam("reviewComments") String reviewComments)
             throws Exception {
         log.info("Inside approveTimesheet method of TimesheetRestController:: timesheetId: " + timesheetId
                 + "reviewerName: " + reviewerName + " reviewComments: " + reviewComments);
@@ -214,9 +216,9 @@ public class TimesheetRestController {
      * @throws Exception
      */
     @GetMapping("/rejectTimesheet")
-    public ResponseEntity<RestResponseEntity> rejectTimesheet(@RequestParam("timesheetId") long timesheetId,
-                                                              @RequestParam("reviewerName") String reviewerName,
-                                                              @RequestParam("reviewComments") String reviewComments)
+    public ResponseEntity<RestResponseEntity> rejectTimesheet(
+            @RequestParam("timesheetId") long timesheetId, @RequestParam("reviewerName") String reviewerName,
+            @RequestParam("reviewComments") String reviewComments)
             throws Exception {
         log.info("Inside rejectTimesheet method of TimesheetRestController:: timesheetId: " + timesheetId
                 + "reviewerName: " + reviewerName + " reviewComments: " + reviewComments);

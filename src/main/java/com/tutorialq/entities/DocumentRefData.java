@@ -31,11 +31,11 @@ public class DocumentRefData implements Serializable {
     private Set<DocumentUpload> documentUploads = new HashSet<>(0);
 
     //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateLastModified;
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDate dateApproved;
     private String nameCreated;
     private String nameLastModified;

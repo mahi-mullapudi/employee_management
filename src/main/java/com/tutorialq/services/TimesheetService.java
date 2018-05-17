@@ -3,7 +3,7 @@ package com.tutorialq.services;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.Timesheet;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TimesheetService {
@@ -29,10 +29,10 @@ public interface TimesheetService {
      * @param endDate
      * @return
      */
-    public Timesheet getTimesheetByEndDate(Date endDate, Employee employee) throws Exception;
+    public Timesheet getTimesheetByEndDate(LocalDate endDate, Employee employee) throws Exception;
 
     /**
-     * Returns the list of Timesheets for a given From Date, To Date and Timesheet Status.
+     * Returns the list of Timesheets for a given From Date, To LocalDate and Timesheet Status.
      *
      * @param fromDate
      * @param toDate
@@ -40,11 +40,11 @@ public interface TimesheetService {
      * @return
      * @throws Exception
      */
-    public List<Timesheet> getTimesheetSummaryStaff(Date fromDate, Date toDate, String timesheetStatus) throws Exception;
+    public List<Timesheet> getTimesheetSummaryStaff(LocalDate fromDate, LocalDate toDate, String timesheetStatus) throws Exception;
 
     /**
      * Approve the Timesheet based on the given TimesheetId and Reviewer Comments.
-     * Also updates other approval date and audit information.
+     * Also updates other approval LocalDate and audit information.
      *
      * @param timesheetId
      * @throws Exception

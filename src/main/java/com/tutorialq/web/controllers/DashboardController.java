@@ -38,15 +38,15 @@ public class DashboardController {
             //Supervisor
             case ApplicationConstants.USER_ROLE_SUPERVISOR_ID:
                 employee.setEmployeeRoleDesc(ApplicationConstants.USER_ROLE_SUPERVISOR);
-                session.setAttribute("weekStartDatesList", DateUtils.getWeekStartDatesMap());
-                session.setAttribute("weekEndDatesList", DateUtils.getWeekEndDatesMap());
+                session.setAttribute("weekStartDatesList", DateUtils.getListLocalWeekStartDatesOfLastThreeMonths());
+                session.setAttribute("weekEndDatesList", DateUtils.getListLocalWeekEndDatesOfLastThreeMonths());
                 session.setAttribute("timesheetStatusList", ApplicationConstants.TIMESHEET_STATUS_LIST);
                 viewName = "staff/dashboard-staff";
                 break;
             //Admin
             case ApplicationConstants.USER_ROLE_ADMIN_ID:
                 employee.setEmployeeRoleDesc(ApplicationConstants.USER_ROLE_ADMIN);
-                session.setAttribute("weekStartDatesList", DateUtils.getListWeekStartDatesOfLastThreeMonths());
+                session.setAttribute("weekStartDatesList", DateUtils.getListLocalWeekStartDatesOfLastThreeMonths());
                 session.setAttribute("weekEndDatesList", DateUtils.getListLocalWeekEndDatesOfLastThreeMonths());
                 session.setAttribute("timesheetStatusList", ApplicationConstants.TIMESHEET_STATUS_LIST);
                 viewName = "staff/dashboard-admin";
@@ -56,7 +56,7 @@ public class DashboardController {
         }
 
         log.info("View Name from the switch case: " + viewName);
-        model.addAttribute("currentEndDate", DateUtils.getCurrentTimesheetWeekEndDate());
+        model.addAttribute("currentEndDate", DateUtils.getLocalTimesheetWeekEndDate());
         return new ModelAndView(viewName);
     }
 }

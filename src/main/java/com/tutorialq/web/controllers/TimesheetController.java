@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,11 +53,11 @@ public class TimesheetController {
         }
         //Check if the startEndDatesMap is already existing in the session.
         if (session.getAttribute("startEndDatesMap") != null) {
-            modelMap.addAttribute("startEndDatesMap", (Map<Date, String>) session.getAttribute("startEndDatesMap"));
+            modelMap.addAttribute("startEndDatesMap", (Map<LocalDate, String>) session.getAttribute("startEndDatesMap"));
         } else {
-            List<Date> endDatesList = DateUtils.getListWeekEndDatesOfLastThreeMonths();
+            List<LocalDate> endDatesList = DateUtils.getListLocalWeekEndDatesOfLastThreeMonths();
             log.info("After getting endDateList: " + endDatesList.size());
-            Map<Date, String> startEndDatesMap = DateUtils.getWeekStartEndDatesMap(endDatesList);
+            Map<LocalDate, String> startEndDatesMap = DateUtils.getWeekStartEndDatesMap(endDatesList);
             modelMap.addAttribute("startEndDatesMap", startEndDatesMap);
             session.setAttribute("startEndDatesMap", startEndDatesMap);
             //Making the map eligible for Garbage collection.
