@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,9 +79,9 @@ public class Employee implements Serializable {
 
     //Audit Information
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateLastModified;
+    private LocalDateTime dateLastModified;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate dateApproved;
     private String nameCreated;

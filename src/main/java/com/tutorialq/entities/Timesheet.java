@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Maintains Timesheet Information.
@@ -54,11 +55,11 @@ public class Timesheet implements Serializable {
     private Employee employee;
     //Audit Information
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateLastModified;
+    private LocalDateTime dateLastModified;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateApproved;
+    private LocalDateTime dateApproved;
     private String nameCreated; //Name of the user Uploaded the timesheet.
     private String nameLastModified;
     private String nameApproved;

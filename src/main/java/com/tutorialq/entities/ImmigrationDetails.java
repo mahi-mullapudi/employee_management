@@ -41,9 +41,9 @@ public class ImmigrationDetails implements Serializable {
 
     //Audit Information
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private LocalDate dateLastModified;
+    private LocalDateTime dateLastModified;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate dateApproved;
     private String nameCreated;

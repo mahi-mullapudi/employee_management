@@ -91,7 +91,8 @@
                             <em class="fa fa-sliders mr-1"></em>
                             Settings
                         </a>
-                        <a class="dropdown-item" href="/employeeManagement/logout"> <em class="fa fa-power-off mr-1"></em>
+                        <a class="dropdown-item" href="/employeeManagement/logout"> <em
+                                class="fa fa-power-off mr-1"></em>
                             Logout </a>
                     </div>
                 </div>
@@ -136,18 +137,6 @@
                                         <label class="col-lg-2 form-control-label">Employee Id </label>
                                         <div class="col-lg-4">
                                             <span> ${user.assignedEmployeeId} </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-2 form-control-label">Client </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.clientName} </span>
-                                        </div>
-
-                                        <label class="col-lg-2 form-control-label">Address </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.clientAddress} </span>
                                         </div>
                                     </div>
                                     <br>
@@ -358,7 +347,8 @@
                     </section>
 
                     <section class="row">
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee Management App
+                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee
+                            Management App
                             Inc.,</a></div>
                     </section>
                 </div>

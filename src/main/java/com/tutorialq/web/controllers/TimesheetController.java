@@ -79,9 +79,8 @@ public class TimesheetController {
      * @return
      */
     @PostMapping("/addTimesheet")
-    public ModelAndView addTimesheet(
-            @ModelAttribute("timesheetObj") Timesheet timesheetObj, BindingResult result,
-            SessionStatus status, Model model, RedirectAttributes redirectAttributes, HttpSession session)
+    public ModelAndView addTimesheet(@ModelAttribute("timesheetObj") Timesheet timesheetObj, BindingResult result,
+                                     SessionStatus status, Model model, RedirectAttributes redirectAttributes, HttpSession session)
             throws Exception {
         log.info("Inside addTimesheet post method.");
         Employee employee = (Employee) session.getAttribute("user");
@@ -92,7 +91,6 @@ public class TimesheetController {
             //Set the fromDate based on the selected end date of the week.
             timesheetObj.setFromDate(DateUtils.getLocalTimesheetWeekStartDateByLocalDate(timesheetObj.getToDate()));
             timesheetObj.setEmployeeName(employee.getEmployeeFullName());
-            //timesheetObj.setClientName(employee.getClientName());
             //File Upload information
             timesheetObj.setBlobContent(file.getBytes());
             timesheetObj.setFileSize(file.getSize());
@@ -113,7 +111,7 @@ public class TimesheetController {
             }
             //Save the Time sheet information in the database.
             timesheetService.save(timesheetObj);
-
+            status.setComplete();
             model.addAttribute("css", "success");
             model.addAttribute("msg", "Timesheet Information Submitted successfully!!");
             model.addAttribute("summarymodal", "yes");

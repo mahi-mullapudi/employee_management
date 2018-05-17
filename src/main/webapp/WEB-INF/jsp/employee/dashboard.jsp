@@ -100,7 +100,6 @@
                                 <h1 class="mb-4">Employee Details</h1>
 
                                 <form>
-
                                     <input type="hidden" id="employeeId" value="${user.employeeId}">
                                     <input type="hidden" id="currentEndDate" value="${currentEndDate}">
 
@@ -128,18 +127,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-lg-2 form-control-label">Client </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.clientName} </span>
-                                        </div>
-
-                                        <label class="col-lg-2 form-control-label">Address </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.clientAddress} </span>
-                                        </div>
-                                    </div>
-
                                 </form>
                             </div>
 
@@ -148,10 +135,10 @@
                                     <h3 class="card-title mb-4">View Timesheet</h3>
 
                                     <form>
-
                                         <div class="form-group row">
-                                            <label for="selectedTimePeriod" class="col-lg-2 form-control-label">Selected
-                                                TimePeriod : </label>
+                                            <label for="selectedTimePeriod" class="col-lg-2 form-control-label">
+                                                Selected TimePeriod :
+                                            </label>
                                             <div class="col-lg-2">
                                                 <span id="selectedTimePeriod"></span>
                                             </div>
@@ -207,14 +194,11 @@
                                             </a>
                                         </div>
                                         <br>
-
-
                                         <div class="form-group">
                                             <label for="timesheetComments">Comments : </label>
                                             <textarea class="form-control col-xl-8" id="timesheetComments"
                                                       rows="3" readonly></textarea>
                                         </div>
-
                                     </form>
                                 </div>
 
