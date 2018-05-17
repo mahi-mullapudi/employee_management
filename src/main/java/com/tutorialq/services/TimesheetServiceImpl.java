@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -57,10 +58,10 @@ public class TimesheetServiceImpl implements TimesheetService {
         log.info("Inside approveTimesheet method of TimesheetServiceImpl, timesheetId :: " + timesheetId);
         Timesheet timesheetObj = timesheetRepository.findById(timesheetId).get();
         timesheetObj.setTimesheetStatus(ApplicationConstants.TIMESHEET_STATUS_APPROVED);
-        timesheetObj.setDateApproved(LocalDate.now());
+        timesheetObj.setDateApproved(LocalDateTime.now());
         timesheetObj.setNameApproved(reviewerName);
         timesheetObj.setReviewerComments(reviewComments);
-        timesheetObj.setDateLastModified(LocalDate.now());
+        timesheetObj.setDateLastModified(LocalDateTime.now());
         timesheetObj.setNameLastModified(reviewerName);
         //Updating the Timesheet object with necessary information.
         timesheetRepository.save(timesheetObj);
@@ -75,7 +76,7 @@ public class TimesheetServiceImpl implements TimesheetService {
         timesheetObj.setDateApproved(null);
         timesheetObj.setNameApproved("");
         timesheetObj.setReviewerComments(reviewComments);
-        timesheetObj.setDateLastModified(LocalDate.now());
+        timesheetObj.setDateLastModified(LocalDateTime.now());
         timesheetObj.setNameLastModified(reviewerName);
         //Updating the Timesheet object with necessary information.
         timesheetRepository.save(timesheetObj);

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Controller
@@ -68,7 +69,7 @@ public class EmployeeDetailsController {
 
         log.info("The form has no errors, so persisting the data.");
         try {
-            employeeDetails.setDateLastModified(LocalDate.now());
+            employeeDetails.setDateLastModified(LocalDateTime.now());
             employeeDetails.setNameLastModified(employeeDetails.getEmployeeFullName());
             log.info("Saving the registration details of the Employee.");
             registrationService.saveRegistrationDetails(employeeDetails);

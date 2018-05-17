@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +99,7 @@ public class TimesheetController {
             timesheetObj.setTimesheetType(ApplicationConstants.TIMESHEET_TYPE_WEEKLY);
             timesheetObj.setNameCreated(employee.getEmployeeFullName());
             timesheetObj.setEmployee(employee);
-            timesheetObj.setDateCreated(LocalDate.now());
+            timesheetObj.setDateCreated(LocalDateTime.now());
 
             timesheetValidator.validate(timesheetObj, result);
             //Check if the Add Time sheet form information has errors.
