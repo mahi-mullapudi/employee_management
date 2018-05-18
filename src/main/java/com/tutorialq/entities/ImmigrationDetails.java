@@ -1,7 +1,10 @@
 package com.tutorialq.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,7 +15,6 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@EqualsAndHashCode(exclude = {"employee", "immiDetailsId"})
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

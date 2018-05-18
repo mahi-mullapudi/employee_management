@@ -217,7 +217,8 @@ public class TimesheetRestController {
      */
     @GetMapping("/rejectTimesheet")
     public ResponseEntity<RestResponseEntity> rejectTimesheet(
-            @RequestParam("timesheetId") long timesheetId, @RequestParam("reviewerName") String reviewerName,
+            @RequestParam("timesheetId") long timesheetId,
+            @RequestParam("reviewerName") String reviewerName,
             @RequestParam("reviewComments") String reviewComments)
             throws Exception {
         log.info("Inside rejectTimesheet method of TimesheetRestController:: timesheetId: " + timesheetId

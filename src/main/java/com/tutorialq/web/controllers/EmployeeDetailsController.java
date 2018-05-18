@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -47,12 +46,13 @@ public class EmployeeDetailsController {
 
 
     @GetMapping("/employeeDetails")
-    public ModelAndView getEmployeeDetails(@RequestParam("empId") long empId,
-                                           Model model, HttpSession session) throws Exception {
+    public String getEmployeeDetails(@RequestParam("empId") long empId,
+                                     Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside getEmployeeDetails method of EmployeeDetails Controller:: empId: " + empId);
         Employee employeeDetails = employeeService.getEmployeeByEmployeeId(empId);
+        model.addAttribute("employeeDetails", employeeDetails);
         //Initiating ModelAndView object with the Employee object
-        return new ModelAndView("employeeDetails", "employeeDetails", employeeDetails);
+        return "staff/employeeDetails";
     }
 
     @PostMapping("/employeeDetails")
@@ -63,7 +63,7 @@ public class EmployeeDetailsController {
         if (result.hasErrors()) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Invalid / Missing Information. Please correct the information entered below!!");
-            return "employeeDetails";
+            return "staff/employeeDetails";
         }
 
         log.info("The form has no errors, so persisting the data.");
@@ -82,7 +82,7 @@ public class EmployeeDetailsController {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Technical issue while saving the Registration information. " +
                     "Please contact Admin for more information!!");
-            return "employeeDetails";
+            return "staff/employeeDetails";
         }
         log.info("Successfully Registered the user, forwarding to the Login page.");
         redirectAttributes.addFlashAttribute("msg", "You have successfully updated Employee Details.");
@@ -93,12 +93,12 @@ public class EmployeeDetailsController {
 
     @GetMapping("/clientDetails")
     public String getClientDetails(@RequestParam("empId") long empId,
-                                   Model model, HttpSession session) throws Exception {
+                                   Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside getClientDetails method of EmployeeDetails Controller:: empId: " + empId);
         Employee employee = employeeService.getEmployeeByEmployeeId(empId);
         model.addAttribute("employeeDetails", employee);
         model.addAttribute("clientDetails", employeeService.getClientDetails(empId));
-        return "clientDetails";
+        return "staff/clientDetails";
     }
 
     @PostMapping("/clientDetails")
@@ -110,7 +110,7 @@ public class EmployeeDetailsController {
         if (result.hasErrors()) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Invalid / Missing Information. Please correct the information entered below!!");
-            return "clientDetails";
+            return "staff/clientDetails";
         }
         try {
             log.info("Saving the registration details of the Employee.");
@@ -132,11 +132,11 @@ public class EmployeeDetailsController {
 
     @GetMapping("/immiDetails")
     public String getImmigrationDetails(@RequestParam("empId") long empId,
-                                        Model model, HttpSession session) throws Exception {
+                                        Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside getImmigrationDetails method of EmployeeDetails Controller:: empId: " + empId);
-        Employee employee = employeeService.getEmployeeByEmployeeId(empId);
-        model.addAttribute("immigrationDetails", employee.getImmigrationDetails());
-        return "immigrationDetails";
+        ImmigrationDetails immigrationDetails = employeeService.getImmigrationDetails(empId);
+        model.addAttribute("immigrationDetails", immigrationDetails);
+        return "staff/immigrationDetails";
     }
 
     @PostMapping("/immiDetails")
@@ -148,7 +148,7 @@ public class EmployeeDetailsController {
         if (result.hasErrors()) {
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Invalid / Missing Information. Please correct the information entered below!!");
-            return "immigrationDetails";
+            return "staff/immigrationDetails";
         }
         try {
             log.info("Saving the immigration details of the Employee.");
