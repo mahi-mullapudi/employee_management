@@ -177,24 +177,30 @@
 
                         </div>
                     </section>
+                    <section class="row">
+                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee
+                            Management App
+                            Inc.,</a></div>
+                    </section>
                 </div>
             </section>
         </main>
     </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/external/jquery-3.2.1.min.js"></script>
-    <script src="js/external/tether.min.js"></script>
-    <script src="js/external/popper.min.js"></script>
-    <script src="js/external/bootstrap.min.js"></script>
-    <script src="js/external/jquery.mask.min.js"></script>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/external/jquery-3.2.1.min.js"></script>
+<script src="js/external/tether.min.js"></script>
+<script src="js/external/popper.min.js"></script>
+<script src="js/external/bootstrap.min.js"></script>
+<script src="js/external/jquery.mask.min.js"></script>
 
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-            $('.phone_us').mask('(000)000-0000');
-        })
-    </script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('.phone_us').mask('(000)000-0000');
+    })
+</script>
 </body>
 </html>

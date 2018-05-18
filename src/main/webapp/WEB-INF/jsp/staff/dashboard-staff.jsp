@@ -87,7 +87,6 @@
 
                 <div class="clear"></div>
             </header>
-
             <section class="row">
                 <div class="col-sm-12">
                     <section class="row">
@@ -320,7 +319,6 @@
                             </div>
 
                         </div>
-
                     </section>
                     <section class="row">
                         <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee Management App
