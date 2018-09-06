@@ -1,6 +1,6 @@
 package com.tutorialq.web.validators;
 
-import com.tutorialq.entities.ClientDetails;
+import com.tutorialq.entities.ClientDetail;
 import com.tutorialq.services.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ public class ClientDetailsValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return ClientDetails.class.equals(clazz);
+        return ClientDetail.class.equals(clazz);
     }
 
     /*
@@ -44,7 +44,7 @@ public class ClientDetailsValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendorEmail", "NotEmpty.clientDetails.vendorEmail");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "invoiceFrequency", "NotEmpty.clientDetails.invoiceFrequency");
 
-        ClientDetails clientDetails = (ClientDetails) target;
+        ClientDetail clientDetails = (ClientDetail) target;
 
         //Email Validation
         if (StringUtils.isNotBlank(clientDetails.getVendorEmail())

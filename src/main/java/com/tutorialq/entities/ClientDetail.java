@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ClientDetails extends AuditModel implements Serializable {
+public class ClientDetail extends AuditModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

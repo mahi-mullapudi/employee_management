@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ImmigrationDetails extends AuditModel implements Serializable {
+public class ImmigrationDetail extends AuditModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

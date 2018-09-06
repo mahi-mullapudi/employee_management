@@ -1,6 +1,6 @@
 package com.tutorialq.web.validators;
 
-import com.tutorialq.entities.ImmigrationDetails;
+import com.tutorialq.entities.ImmigrationDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class ImmigrationDetailsValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return ImmigrationDetails.class.equals(clazz);
+        return ImmigrationDetail.class.equals(clazz);
     }
 
     /*

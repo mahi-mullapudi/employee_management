@@ -1,9 +1,9 @@
 package com.tutorialq.web.controllers;
 
 import com.tutorialq.constants.ApplicationConstants;
-import com.tutorialq.entities.ClientDetails;
+import com.tutorialq.entities.ClientDetail;
 import com.tutorialq.entities.Employee;
-import com.tutorialq.entities.ImmigrationDetails;
+import com.tutorialq.entities.ImmigrationDetail;
 import com.tutorialq.exceptions.CustomException;
 import com.tutorialq.services.EmailService;
 import com.tutorialq.services.EmployeeService;
@@ -44,6 +44,11 @@ public class EmployeeDetailsController {
     @Autowired
     EncryptDecryptUtils encryptDecryptUtils;
 
+    @GetMapping("/employeeDetailsSummary")
+    public String getEmployeeDetailsSummary(Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+        log.info("Inside getEmployeeDetailsSummary method of EmployeeDetails Controller.");
+        return "staff/employeeDetailsSummary";
+    }
 
     @GetMapping("/employeeDetails")
     public String getEmployeeDetails(@RequestParam("empId") long empId,
@@ -90,11 +95,11 @@ public class EmployeeDetailsController {
         return "redirect:/employeeDetails?empId=" + employeeDetails.getEmployeeId();
     }
 
-    @GetMapping("clientDetailsSummary")
+    @GetMapping("/clientDetailsSummary")
     public String getClientDetailsSummary(@RequestParam("empId") long empId,
                                           Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside the getClientDetailsSummary method of Employee Details Controller:: empId: " + empId);
-        List<ClientDetails> clientDetailsList = employeeService.getClientDetailsSummary(empId);
+        List<ClientDetail> clientDetailsList = employeeService.getClientDetailsSummary(empId);
         model.addAttribute("clientDetailsSummary", clientDetailsList);
         if (clientDetailsList.size() > 0) {
             model.addAttribute("clientDetails", clientDetailsList.get(0));
@@ -115,7 +120,7 @@ public class EmployeeDetailsController {
             redirectAttributes.addFlashAttribute("msg", "Your role do not have access to view the Client Details. Please login as Supervisor/Admin to continue.");
             return "redirect:/login";
         }
-        ClientDetails clientDetails = clientDetailsId != 0 ? employeeService.getClientDetails(clientDetailsId) : new ClientDetails();
+        ClientDetail clientDetails = clientDetailsId != 0 ? employeeService.getClientDetails(clientDetailsId) : new ClientDetail();
         clientDetails.setEmployee(employeeService.getEmployeeById(empId));
         model.addAttribute("clientDetails", clientDetails);
         return "staff/clientDetails";
@@ -123,7 +128,7 @@ public class EmployeeDetailsController {
 
     @PostMapping("/clientDetails")
     public String submitClientDetails(
-            @ModelAttribute("clientDetails") ClientDetails clientDetails, BindingResult result,
+            @ModelAttribute("clientDetails") ClientDetail clientDetails, BindingResult result,
             SessionStatus status, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside submitClientDetails method of EmployeeDetails Controller:: clientDetails: " + clientDetails.getClientDetailsId());
         Employee employee = (Employee) session.getAttribute("user");
@@ -171,14 +176,14 @@ public class EmployeeDetailsController {
             redirectAttributes.addFlashAttribute("msg", "Your role do not have access to view the Immigration Details. Please login as Supervisor/Admin to continue.");
             return "redirect:/login";
         }
-        List<ImmigrationDetails> immigrationDetailsList = employeeService.getImmigrationDetailsSummary(empId);
+        List<ImmigrationDetail> immigrationDetailsList = employeeService.getImmigrationDetailsSummary(empId);
         model.addAttribute("immigrationDetailsSummary", immigrationDetailsList);
         return "staff/immigrationDetails";
     }
 
     @PostMapping("/immiDetails")
     public String submitImmigrationDetails(
-            @ModelAttribute("clientDetails") ImmigrationDetails immigrationDetails, BindingResult result,
+            @ModelAttribute("clientDetails") ImmigrationDetail immigrationDetails, BindingResult result,
             SessionStatus status, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside immigrationDetails method of EmployeeDetails Controller:: immigrationDetailsId: " + immigrationDetails.getImmiDetailsId());
         Employee employee = (Employee) session.getAttribute("user");

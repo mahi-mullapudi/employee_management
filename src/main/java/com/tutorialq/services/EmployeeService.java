@@ -1,12 +1,20 @@
 package com.tutorialq.services;
 
-import com.tutorialq.entities.ClientDetails;
+import com.tutorialq.entities.ClientDetail;
 import com.tutorialq.entities.Employee;
-import com.tutorialq.entities.ImmigrationDetails;
+import com.tutorialq.entities.ImmigrationDetail;
 
 import java.util.List;
 
 public interface EmployeeService {
+
+    /**
+     * List of Active Employee Details Summary Information.
+     *
+     * @return
+     * @throws Exception
+     */
+    List<Employee> getEmployeeDetailsSummary() throws Exception;
 
     /**
      * Returns Employee object for a given EmployeeId.
@@ -33,7 +41,7 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    List<ClientDetails> getClientDetailsSummary(long employeeId) throws Exception;
+    List<ClientDetail> getClientDetailsSummary(long employeeId) throws Exception;
 
     /**
      * Returns ClientDetails object for a given clientDetailsId object.
@@ -42,7 +50,7 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    ClientDetails getClientDetails(long clientDetailsId) throws Exception;
+    ClientDetail getClientDetails(long clientDetailsId) throws Exception;
 
     /**
      * Returns ImmigrationDetails object for a given Immigration Details Id.
@@ -50,21 +58,21 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    ImmigrationDetails getImmigrationDetails(long immigrationDetailsId) throws Exception;
+    ImmigrationDetail getImmigrationDetails(long immigrationDetailsId) throws Exception;
 
     /**
      * Save Client Details.
      *
      * @throws Exception
      */
-    void saveClientDetails(ClientDetails clientDetails) throws Exception;
+    void saveClientDetails(ClientDetail clientDetails) throws Exception;
 
     /**
      * Save Client Details by getting the Employee object and setting it.
      *
      * @throws Exception
      */
-    void saveClientDetails(long employeeId, ClientDetails clientDetails) throws Exception;
+    void saveClientDetails(long employeeId, ClientDetail clientDetails) throws Exception;
 
     /**
      * Save Immigration Details.
@@ -72,7 +80,7 @@ public interface EmployeeService {
      * @param immigrationDetails
      * @throws Exception
      */
-    void saveImmigrationDetails(ImmigrationDetails immigrationDetails) throws Exception;
+    void saveImmigrationDetails(ImmigrationDetail immigrationDetails) throws Exception;
 
     /**
      * Returns the list of ImmigrationDetails for a given EmployeeId.
@@ -81,5 +89,5 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    List<ImmigrationDetails> getImmigrationDetailsSummary(long empId) throws Exception;
+    List<ImmigrationDetail> getImmigrationDetailsSummary(long empId) throws Exception;
 }

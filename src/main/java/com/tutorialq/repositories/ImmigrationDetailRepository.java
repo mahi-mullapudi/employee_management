@@ -1,13 +1,13 @@
 package com.tutorialq.repositories;
 
-import com.tutorialq.entities.ImmigrationDetails;
+import com.tutorialq.entities.ImmigrationDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface ImmigrationDetailsRepository extends JpaRepository<ImmigrationDetails, Long> {
+public interface ImmigrationDetailRepository extends JpaRepository<ImmigrationDetail, Long> {
 
     /**
      * Returns the List of ImmigrationDetails for a given EmployeeId.
@@ -15,6 +15,6 @@ public interface ImmigrationDetailsRepository extends JpaRepository<ImmigrationD
      * @param employeeId
      * @return
      */
-    List<ImmigrationDetails> findAllByEmployeeEmployeeId(long employeeId);
+    List<ImmigrationDetail> findAllByEmployeeEmployeeId(long employeeId);
 
 }
