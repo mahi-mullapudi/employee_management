@@ -1,0 +1,95 @@
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+.steps-container {
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    white-space: nowrap;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    width: 100%;
+    counter-reset: steps;
+    border-left-color: #31708f;
+    border-right-color: rgb(26, 54, 101);
+}
+
+.steps {
+    position: relative;
+    display: inline-block;
+    left: -28px; /* -2px default + 26px offset to hide skewed area on the left side of first element*/
+    height: 50px;
+    line-height: 50px;
+    margin-left: 0px;
+    margin-right: 0px;
+    counter-increment: steps;
+    cursor: pointer;
+    transition: background 1s;
+    min-height: 30px;
+}
+
+.steps:after,
+.steps:before {
+    position: absolute;
+    content: '';
+    left: 0px;
+    height: 50%;
+    width: 100%;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-left: 3px solid; /* thicker border as skew makes them look thin */
+    border-right: 3px solid;
+    /*background: rgba(255, 255, 255, 0.15);*/
+    color: rgb(26, 54, 101);
+}
+
+.steps:before {
+    transform: skew(45deg);
+    top: 0px;
+    border-bottom: none;
+    transform-origin: top left;
+}
+
+.steps:after {
+    transform: skew(-45deg);
+    bottom: 0px;
+    border-top: none;
+    transform-origin: bottom left;
+}
+
+.steps span {
+    display: block;
+    padding-left: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 75%;
+    vertical-align: middle;
+}
+
+.steps span:before {
+    content: counter(steps) ". ";
+}
+
+.steps.active span {
+    font-weight: bold;
+}
+
+.steps.complete span {
+    font-weight: bold;
+}
+
+.steps.active:before,
+.steps.active:after {
+    background-color: rgba(26, 54, 101, 0.56);
+    color: rgb(26, 54, 101);
+}
+
+.steps.complete:before,
+.steps.complete:after {
+    background-color: rgba(217, 237, 247, 0.43);
+    color: #31708f;
+}

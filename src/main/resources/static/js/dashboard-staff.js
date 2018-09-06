@@ -1,26 +1,11 @@
 $(document).ready(function () {
-    loadSummaryTable();
+    fetchData();
     $('#viewTimesheetDiv').hide();
+    /*  Submit form using Ajax */
+    $('button[type=submit]').click(function (e) {
+        fetchData(e);
+    });
 });
-
-/**
- * Check for the validations in the input and then call the function to create the DataTable based on the given Search details.
- * @returns {boolean}
- */
-function loadSummaryTable() {
-    var fromDate = $('#selectFromDate').val();
-    var toDate = $('#selectToDate').val();
-    var status = $('#selectStatus').val();
-    console.log("Inside setSummaryTable:: fromDate: " + fromDate + " toDate: " + toDate + " status: " + status);
-    //Check if the FromDate is greater than the ToDate
-    if (new Date(fromDate) >= new Date(toDate)) {
-        alert("Timesheet week Start date selected should be before the selected End Date. ");
-        return false;
-    }
-    //Fetch TImesheet Summary Data from the service.
-    fetchData(fromDate, toDate, status);
-    return false; //Just avoid the reload of the page.
-}
 
 /**
  * Retrieve Timesheet Summary Data from the database and populate the datatable with corresponding columns.
@@ -28,8 +13,16 @@ function loadSummaryTable() {
  * @param toDate
  * @param status
  */
-function fetchData(fromDate, toDate, status) {
-    console.log("Inside the loadDataTable method of dashboard-staff");
+function fetchData(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    var fromDate = $('#selectFromDate').val();
+    var toDate = $('#selectToDate').val();
+    var status = $('#selectStatus').val();
+    console.log("Inside setSummaryTable:: fromDate: " + fromDate + " toDate: " + toDate + " status: " + status);
+
     if ($.fn.dataTable.isDataTable('#timesheetSummary')) {
         // Table Already Exists - dispose it and recreate.
         var table = $('#timesheetSummary').DataTable();
@@ -38,9 +31,8 @@ function fetchData(fromDate, toDate, status) {
 
     var table = $('#timesheetSummary').DataTable({
         ajax: {
-            url: '/employeeManagement/api/timesheetSummaryStaff?fromDate='
-            + fromDate + '&toDate=' + toDate
-            + '&timesheetStatus=' + status,
+            url: '/employeeManagement/api/timesheetSummaryStaff?fromDate=' + fromDate
+            + '&toDate=' + toDate + '&timesheetStatus=' + status,
             dataSrc: ''
         },
         dom: 'lBfrtip',

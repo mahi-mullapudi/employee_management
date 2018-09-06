@@ -10,17 +10,47 @@
     <link rel="icon" href="images/favicon.ico">
     <title>Employee Management-Client Details</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/external/bootstrap.min.css" rel="stylesheet">
-    <!--Fonts-->
+    <link href="./css/externalUpdated/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/externalUpdated/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/externalUpdated/font-awesome-animation.min.css" rel="stylesheet" type="text/css">
+    <!-- Navbar -->
+    <link href="./css/externalUpdated/navbar.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href=""> <!-- For addressing favicon.ico failure -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
-    <!-- Icons -->
-    <link href="css/external/font-awesome.css" rel="stylesheet">
+    <!-- Data Table includes -->
+    <link href="./css/externalUpdated/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/externalUpdated/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/externalUpdated/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="./css/external/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/login.css" rel="stylesheet">
+
+    <style>
+        @media (min-width: 1200px) {
+            .row {
+                margin-right: 0px;
+                margin-left: 0px;
+            }
+        }
+
+        .dataTables_wrapper {
+            margin-top: 15px;
+        }
+
+        .page-link {
+            background-color: white;
+        }
+
+        .buttons-pdf {
+            margin-right: 10px;
+        }
+    </style>
+
 </head>
-<body>
+<body onload="fetchSummary(${clientDetailsSummary});">
 <div class="container-fluid" id="wrapper">
     <div class="row">
         <jsp:include page="../sideNavbar.jsp"/>
@@ -52,11 +82,12 @@
                             <form:form method="POST" modelAttribute="clientDetails" action="${clientDetailsActionUrl}">
 
                                 <form:hidden path="clientDetailsId"/>
+                                <form:hidden path="employee.employeeId"/>
 
                                 <div class="row">
 
                                     <spring:bind path="clientName">
-                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="clientName">Client Name</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="clientName" maxlength="50"
@@ -72,7 +103,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="clientAddress">
-                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="clientAddress">Client Address</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="clientAddress"
@@ -88,7 +119,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="clientCity">
-                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="clientCity">City</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="clientCity" maxlength="50" id="clientCity"
@@ -104,7 +135,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="clientState">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="clientState">State</label>
                                             <div class="inputGroupContainer">
                                                 <form:input
@@ -120,7 +151,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="clientZip">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="clientZip">Zip</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="clientZip" id="clientZip" maxlength="5"
@@ -135,7 +166,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="contractCompany">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="contractCompany">Contract
                                                 Company</label>
                                             <div class="inputGroupContainer">
@@ -151,39 +182,8 @@
                                         </div>
                                     </spring:bind>
 
-                                    <spring:bind path="contractStartDate">
-                                        <div class="form-group col-md-3">
-                                            <label class="form-control-label" for="contractStartDate">
-                                                Contract Start Date
-                                            </label>
-                                            <div class="inputGroupContainer">
-                                                <form:select path="contractStartDate" id="contractStartDate"
-                                                             data-toggle="tooltip" data-animation="false"
-                                                             class="form-control ${status.error ? 'form-control-danger' : ''}"/>
-                                                <div class="form-control-feedback">
-                                                    <form:errors path="contractStartDate"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </spring:bind>
-
-                                    <spring:bind path="contractEndDate">
-                                        <div class="form-group col-md-3">
-                                            <label class="form-control-label" for="contractEndDate">Contract End
-                                                Date</label>
-                                            <div class="inputGroupContainer">
-                                                <form:select path="contractEndDate" id="contractEndDate"
-                                                             data-toggle="tooltip" data-animation="false"
-                                                             class="form-control ${status.error ? 'form-control-danger' : ''}"/>
-                                                <div class="form-control-feedback">
-                                                    <form:errors path="contractEndDate"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </spring:bind>
-
                                     <spring:bind path="vendorCompany">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="vendorCompany">Vendor Company</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="vendorCompany" id="vendorCompany"
@@ -196,8 +196,52 @@
                                         </div>
                                     </spring:bind>
 
+                                    <spring:bind path="contractStartDate">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
+                                            <label class="form-control-label" for="contractStartDate">
+                                                Contract Start Date
+                                            </label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                    <form:input path="contractStartDate" id="contractStartDate"
+                                                                data-toggle="tooltip" data-animation="false"
+                                                                class="form-control ${status.error ? 'form-control-danger' : ''} date_format"
+                                                                autocomplete="off" data-date-format="MM/DD/YYYY"/>
+                                                </div>
+                                                <div class="form-control-feedback">
+                                                    <form:errors path="contractStartDate"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </spring:bind>
+
+                                    <spring:bind path="contractEndDate">
+                                        <div class="form-group col-md-3 ${status.error ? 'has-danger' : ''}">
+                                            <label class="form-control-label" for="contractEndDate">Contract End
+                                                Date</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                    <form:input path="contractEndDate" id="contractEndDate"
+                                                                data-toggle="tooltip" data-animation="false"
+                                                                class="form-control ${status.error ? 'form-control-danger' : ''} date_format"
+                                                                autocomplete="off" data-date-format="MM/DD/YYYY"/>
+                                                </div>
+                                                <div class="form-control-feedback">
+                                                    <form:errors path="contractEndDate"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </spring:bind>
+
+
                                     <spring:bind path="vendorContactName">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="vendorContactName">
                                                 Vendor Contact Name</label>
                                             <div class="inputGroupContainer">
@@ -212,12 +256,12 @@
                                     </spring:bind>
 
                                     <spring:bind path="vendorPhone">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="vendorPhone">Vendor Phone</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="vendorPhone" id="contractEndDate"
                                                             data-toggle="tooltip" data-animation="false"
-                                                            class="form-control ${status.error ? 'form-control-danger' : ''}"/>
+                                                            class="form-control phone_us ${status.error ? 'form-control-danger' : ''}"/>
                                                 <div class="form-control-feedback">
                                                     <form:errors path="vendorPhone"/>
                                                 </div>
@@ -226,7 +270,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="vendorEmail">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="vendorEmail">Vendor Email</label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="vendorEmail" id="contractEndDate"
@@ -240,7 +284,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="paymentTerms">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group required col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="paymentTerms">Payment Terms</label>
                                             <div class="inputGroupContainer">
                                                 <form:select path="paymentTerms" id="paymentTerms"
@@ -256,7 +300,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="invoiceContactName">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="invoiceContactName">
                                                 Invoice Contact Name
                                             </label>
@@ -272,14 +316,14 @@
                                     </spring:bind>
 
                                     <spring:bind path="invoiceContactPhone">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="invoiceContactPhone">
                                                 Invoice Contact Phone
                                             </label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="invoiceContactPhone" id="invoiceContactPhone"
                                                             data-toggle="tooltip" data-animation="false"
-                                                            class="form-control ${status.error ? 'form-control-danger' : ''}"/>
+                                                            class="form-control phone_us ${status.error ? 'form-control-danger' : ''}"/>
                                                 <div class="form-control-feedback">
                                                     <form:errors path="invoiceContactPhone"/>
                                                 </div>
@@ -288,9 +332,10 @@
                                     </spring:bind>
 
                                     <spring:bind path="invoiceContactEmail">
-                                        <div class="form-group col-md-3">
-                                            <label class="form-control-label" for="vendorEmail">Invoice Contact
-                                                Email</label>
+                                        <div class="form-group col-md-3 ${status.error ? 'has-danger' : ''}">
+                                            <label class="form-control-label" for="invoiceContactEmail">
+                                                Invoice Contact Email
+                                            </label>
                                             <div class="inputGroupContainer">
                                                 <form:input path="invoiceContactEmail" id="invoiceContactEmail"
                                                             data-toggle="tooltip" data-animation="false"
@@ -303,7 +348,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="invoiceFrequency">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="invoiceFrequency">Invoice
                                                 Frequency</label>
                                             <div class="inputGroupContainer">
@@ -320,7 +365,7 @@
                                     </spring:bind>
 
                                     <spring:bind path="comments">
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-12 ${status.error ? 'has-danger' : ''}">
                                             <label class="form-control-label" for="comments">Comments</label>
                                             <div class="inputGroupContainer">
                                                 <form:textarea path="comments" id="comments"
@@ -334,14 +379,31 @@
                                     </spring:bind>
                                 </div>
 
-                                <div class="form-signin">
-                                    <button class="btn btn-md btn-primary btn-block" type="submit">Update Client Details
-                                    </button>
+                                <div class="d-flex justify-content-around">
+                                    <div>
+                                        <button class="btn btn-md btn-primary btn-block" type="submit">
+                                            Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-md btn-success btn-block" type="submit">
+                                            Submit
+                                        </button>
+                                    </div>
                                 </div>
 
                             </form:form>
                             <hr>
-
+                            <h4 class="subheading">
+                                Client Details Summary
+                            </h4>
+                            <div class="table-responsive">
+                                <table id="clientDetailsSummary"
+                                       class="table table-striped table-bordered order-column row-border text-center"
+                                       data-page-length='10' width="100%">
+                                    <thead class="text-center table-header" style="color: white"></thead>
+                                </table>
+                            </div>
                         </div>
                     </section>
                     <section class="row">
@@ -357,17 +419,22 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/external/jquery-3.2.1.min.js"></script>
-<script src="js/external/tether.min.js"></script>
-<script src="js/external/popper.min.js"></script>
-<script src="js/external/bootstrap.min.js"></script>
-<script src="js/external/jquery.mask.min.js"></script>
-
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-        $('.phone_us').mask('(000)000-0000');
-    })
-</script>
+<script src="./js/externalUpdated/jquery.min.js"></script>
+<script src="./js/externalUpdated/bootstrap.bundle.min.js"></script>
+<script src="./js/externalUpdated/navbar.js"></script>
+<script src="./js/externalUpdated/jquery.mask.min.js"></script>
+<script src="./js/externalUpdated/jquery.dataTables.min.js"></script>
+<script src="./js/externalUpdated/dataTables.bootstrap4.min.js"></script>
+<script src="./js/externalUpdated/dataTables.buttons.min.js"></script>
+<script src="./js/externalUpdated/buttons.bootstrap4.min.js"></script>
+<script src="./js/externalUpdated/dataTables.natural.js"></script>
+<script src="./js/externalUpdated/jszip.min.js"></script>
+<script src="./js/externalUpdated/pdfmake.min.js"></script>
+<script src="./js/externalUpdated/vfs_fonts.js"></script>
+<script src="./js/externalUpdated/buttons.html5.min.js"></script>
+<script src="./js/external/moment.min.js"></script>
+<script src="./js/external/bootstrap-datepicker.js"></script>
+<script src="./js/external/bootstrap-datetimepicker.min.js"></script>
+<script src="js/clientDetails.js"></script>
 </body>
 </html>

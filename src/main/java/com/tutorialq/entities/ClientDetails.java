@@ -15,13 +15,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ClientDetails implements Serializable {
+public class ClientDetails extends AuditModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CLIENT_DETAILS_ID", unique = true, nullable = false)
     private long clientDetailsId;
     private String clientName; //Name of the Client.
+    private String clientStreet;
     private String clientAddress;//Address of the Client.
     private String clientCity;
     private String clientState;
@@ -48,10 +49,6 @@ public class ClientDetails implements Serializable {
     @JsonIgnore
     private Employee employee;
     //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
-    private LocalDateTime dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
-    private LocalDateTime dateLastModified;
     @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateApproved;
     private String nameCreated;

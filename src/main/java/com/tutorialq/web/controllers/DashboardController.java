@@ -2,6 +2,7 @@ package com.tutorialq.web.controllers;
 
 import com.tutorialq.constants.ApplicationConstants;
 import com.tutorialq.entities.Employee;
+import com.tutorialq.models.DashboardSearch;
 import com.tutorialq.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,7 @@ public class DashboardController {
                 session.setAttribute("weekStartDatesList", DateUtils.getListLocalWeekStartDatesOfLastThreeMonths());
                 session.setAttribute("weekEndDatesList", DateUtils.getListLocalWeekEndDatesOfLastThreeMonths());
                 session.setAttribute("timesheetStatusList", ApplicationConstants.TIMESHEET_STATUS_LIST);
+                model.addAttribute("dashboardSearch", new DashboardSearch());
                 viewName = "staff/dashboard-staff";
                 break;
             //Admin
@@ -49,7 +51,8 @@ public class DashboardController {
                 session.setAttribute("weekStartDatesList", DateUtils.getListLocalWeekStartDatesOfLastThreeMonths());
                 session.setAttribute("weekEndDatesList", DateUtils.getListLocalWeekEndDatesOfLastThreeMonths());
                 session.setAttribute("timesheetStatusList", ApplicationConstants.TIMESHEET_STATUS_LIST);
-                viewName = "staff/dashboard-admin";
+                model.addAttribute("dashboardSearch", new DashboardSearch());
+                viewName = "staff/dashboard-staff";
                 break;
             default:
                 viewName = "login";

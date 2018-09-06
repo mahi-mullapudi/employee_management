@@ -51,6 +51,7 @@
                             <form:form method="POST" modelAttribute="immigrationDetails" action="${immiActionUrl}">
 
                                 <form:hidden path="immiDetailsId"/>
+                                <form:hidden path="employee.employeeId"/>
                                 <div class="row">
 
                                     <spring:bind path="currentStatus">
@@ -148,39 +149,42 @@
                                         </div>
                                     </spring:bind>
                                 </div>
+
+                                <div class="d-flex justify-content-around">
+                                    <div>
+                                        <button class="btn btn-md btn-success btn-block" type="submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+
                             </form:form>
                             <hr>
                             <h4 class="subheading">
-                                Immigration Document Upload
-                            </h4>
-                            <form:form method="POST" enctype="multipart/form-data" action="">
-
-                            </form:form>
-                            <h4 class="subheading">
-                                Immigration Document Summary
+                                Immigration Details Summary
                             </h4>
                             <div class="table-responsive">
-                                <table id="immigrationDocs" class="table table-striped table-bordered"
+                                <table id="immigrationDetails" class="table table-striped table-bordered"
                                        cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
-                                        <th>Document Id</th>
-                                        <th>Document Name</th>
-                                        <th>Document Type</th>
-                                        <th>Uploaded Date</th>
+                                        <th>Id</th>
+                                        <th>Immigration Status</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
                                         <th>Comments</th>
                                         <th>View</th>
                                     </tr>
                                     </thead>
                                 </table>
                             </div>
-
                         </div>
                     </section>
                     <section class="row">
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee
-                            Management App
-                            Inc.,</a></div>
+                        <div class="col-12 mt-1 mb-4">Copy Right by
+                            <a href="http://www.Employee Management App.com/">
+                                Employee Management App Inc.,</a>
+                        </div>
                     </section>
                 </div>
             </section>

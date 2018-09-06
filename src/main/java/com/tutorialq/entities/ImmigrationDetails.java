@@ -11,14 +11,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ImmigrationDetails implements Serializable {
+public class ImmigrationDetails extends AuditModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,10 +42,6 @@ public class ImmigrationDetails implements Serializable {
     private Employee employee;
 
     //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
-    private LocalDateTime dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
-    private LocalDateTime dateLastModified;
     @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDate dateApproved;
     private String nameCreated;

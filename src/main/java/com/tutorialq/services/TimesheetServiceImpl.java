@@ -27,6 +27,11 @@ public class TimesheetServiceImpl implements TimesheetService {
     }
 
     @Override
+    public List<Timesheet> getTimesheetsByEmpId(long employeeId) throws Exception {
+        return timesheetRepository.findByEmployeeEmployeeId(employeeId);
+    }
+
+    @Override
     public Timesheet getTimesheetByTimesheetId(long timesheetId) throws Exception {
         log.info("Inside getTimesheetByTimesheetId method of TimesheetServiceImpl --> timesheetId: " + timesheetId);
         return timesheetRepository.findById(timesheetId).orElse(new Timesheet());
@@ -60,7 +65,6 @@ public class TimesheetServiceImpl implements TimesheetService {
         timesheetObj.setDateApproved(LocalDateTime.now());
         timesheetObj.setNameApproved(reviewerName);
         timesheetObj.setReviewerComments(reviewComments);
-        timesheetObj.setDateLastModified(LocalDateTime.now());
         timesheetObj.setNameLastModified(reviewerName);
         //Updating the Timesheet object with necessary information.
         timesheetRepository.save(timesheetObj);
@@ -75,7 +79,6 @@ public class TimesheetServiceImpl implements TimesheetService {
         timesheetObj.setDateApproved(null);
         timesheetObj.setNameApproved("");
         timesheetObj.setReviewerComments(reviewComments);
-        timesheetObj.setDateLastModified(LocalDateTime.now());
         timesheetObj.setNameLastModified(reviewerName);
         //Updating the Timesheet object with necessary information.
         timesheetRepository.save(timesheetObj);

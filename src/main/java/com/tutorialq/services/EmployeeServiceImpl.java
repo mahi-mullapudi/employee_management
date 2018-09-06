@@ -3,12 +3,15 @@ package com.tutorialq.services;
 import com.tutorialq.entities.ClientDetails;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.ImmigrationDetails;
+import com.tutorialq.exceptions.CustomException;
 import com.tutorialq.repositories.ClientDetailsRepository;
 import com.tutorialq.repositories.EmployeeRepository;
 import com.tutorialq.repositories.ImmigrationDetailsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -21,8 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     ImmigrationDetailsRepository immigrationRepository;
 
     @Override
-    public Employee getEmployeeByEmployeeId(long employeeId) throws Exception {
-        log.info("Inside getEmployeeByEmployeeId method of EmployeeServiceImpl: " + employeeId);
+    public Employee getEmployeeById(long employeeId) throws Exception {
+        log.info("Inside getEmployeeById method of EmployeeServiceImpl: " + employeeId);
         return employeeRepository.findById(employeeId).orElse(new Employee());
     }
 
@@ -30,6 +33,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean checkIfEmployeeIdExists(String emailAddress) throws Exception {
         log.info("Inside checkIfEmployeeIdExists method of EmployeeServiceImpl:: emailAddress: " + emailAddress);
         return employeeRepository.countEmployeeByEmployeeEmailId(emailAddress) > 0;
+    }
+
+    @Override
+    public List<ClientDetails> getClientDetailsSummary(long employeeId) throws Exception {
+        log.info("Inside getClientDetailsSummary method of EmployeeServiceImpl:: employeeId: " + employeeId);
+        return clientRepository.findAllByEmployeeEmployeeIdOrderByCreatedAtDesc(employeeId);
     }
 
     @Override
@@ -42,6 +51,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void saveClientDetails(ClientDetails clientDetails) throws Exception {
         log.info("Inside the saveClientDetails method of EmployeeServiceImpl");
         clientRepository.save(clientDetails);
+
+    }
+
+    @Override
+    public void saveClientDetails(long empId, ClientDetails clientDetails) throws Exception {
+        log.info("Inside the saveClientDetails method of EmployeeServiceImpl:: empId: " + empId);
+        employeeRepository.findById(empId).map(employee -> {
+            clientDetails.setEmployee(employee);
+            return clientRepository.save(clientDetails);
+        }).orElseThrow(() -> new CustomException("empId " + empId + " not found"));
+    }
+
+    @Override
+    public List<ImmigrationDetails> getImmigrationDetailsSummary(long employeeId) throws Exception {
+        log.info("Inside the getImmigrationDetailsSummary method of EmployeeServiceImpl");
+        return immigrationRepository.findAllByEmployeeEmployeeId(employeeId);
     }
 
     @Override

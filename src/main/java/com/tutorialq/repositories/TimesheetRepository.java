@@ -2,14 +2,16 @@ package com.tutorialq.repositories;
 
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.Timesheet;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface TimesheetRepository extends CrudRepository<Timesheet, Long> {
+public interface TimesheetRepository extends JpaRepository<Timesheet, Long> {
+
+    public List<Timesheet> findByEmployeeEmployeeId(long employeeId);
 
     /**
      * Returns the Timesheet information based on the given End Date of the week.

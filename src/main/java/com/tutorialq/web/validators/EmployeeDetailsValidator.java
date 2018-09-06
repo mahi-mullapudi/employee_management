@@ -10,9 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 @Component
 @Slf4j
 public class EmployeeDetailsValidator implements Validator {
@@ -20,14 +17,11 @@ public class EmployeeDetailsValidator implements Validator {
     @Autowired
     EmailValidator emailValidator;
     @Autowired
+    PhoneNumberValidator phoneValidator;
+    @Autowired
     PasswordValidator passwordValidator;
     @Autowired
     EmployeeService employeeService;
-
-    private Pattern pattern;
-    private Matcher matcher;
-
-    final String PHONE_PATTERN = "^[0-9]{10}$";
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -46,6 +40,7 @@ public class EmployeeDetailsValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "skillSet", "NotEmpty.registration.skillSet");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyName", "NotEmpty.registration.companyName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employmentType", "NotEmpty.registration.employmentType");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "NotEmpty.registration.phoneNum");
 
         Employee employeeDetails = (Employee) target;
 
@@ -66,13 +61,9 @@ public class EmployeeDetailsValidator implements Validator {
 
         if (!StringUtils.isBlank(employeeDetails.getEmployeePhone())) {
             String phoneNumber = employeeDetails.getEmployeePhone().replaceAll("[()-]", "");
-            pattern = Pattern.compile(PHONE_PATTERN);
-            matcher = pattern.matcher(phoneNumber);
-            if (!matcher.matches()) {
+            if (!phoneValidator.validate(phoneNumber)) {
                 errors.rejectValue("phoneNumber", "NotValid.registration.phoneNum");
             }
-        } else {
-            errors.rejectValue("phoneNumber", "NotEmpty.registration.phoneNum");
         }
 
         if (employeeDetails.getEmployeeStartDate() == null) {

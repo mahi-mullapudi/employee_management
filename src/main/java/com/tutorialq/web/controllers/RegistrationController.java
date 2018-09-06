@@ -26,8 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -88,7 +86,6 @@ public class RegistrationController {
         log.info("The form has no errors, so persisting the data.");
         try {
             employeeRegistration.setAccountStatusFlag(ApplicationConstants.REGISTRATION_STATUS_ACTIVE);
-            employeeRegistration.setDateCreated(LocalDateTime.now());
             employeeRegistration.setNameCreated(employeeRegistration.getEmployeeFullName());
             log.info("Saving the registration details of the Employee.");
             registrationService.saveRegistrationDetails(employeeRegistration);

@@ -262,7 +262,7 @@
 <script src="./js/external/bootstrap.min.js"></script>
 <script src="./js/external/jquery.dataTables.min.js"></script>
 <script src="./js/external/dataTables.bootstrap4.min.js"></script>
-<script src="./js/external/bootstrap-datepicker.js"></script>
+<script src="./js/external/bootstrap-datetimepicker.min.js"></script>
 <script src="./js/external/custom.js"></script>
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/dashboard.js"></script>

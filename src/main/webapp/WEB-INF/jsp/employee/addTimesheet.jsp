@@ -144,8 +144,9 @@
                                     <div class="row">
                                         <spring:bind path="toDate">
                                             <div class="form-group row col-md-6 ${status.error ? 'has-danger' : ''}">
-                                                <label for="selectTimePeriod" class="col-lg-4 form-control-label">Select
-                                                    Time Period: </label>
+                                                <label for="selectTimePeriod" class="col-lg-4 form-control-label">
+                                                    Select Time Period:
+                                                </label>
                                                 <div class="inputGroupContainer col-lg-8">
                                                     <form:select path="toDate" items="${startEndDatesMap}"
                                                                  class="form-control ${status.error ? 'form-control-danger' : ''}"
@@ -266,9 +267,11 @@
                                     </div>
 
                                     <br>
-
-                                    <div class="text-center">
-                                        <input type="submit" class="btn btn-success" value="Submit For Review"/>
+                                    <!-- Begin Buttons -->
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <input type="submit" class="btn btn-success" value="Submit For Review"/>
+                                        </div>
                                     </div>
 
                                 </form:form>
@@ -335,7 +338,7 @@
 
                                                 <div class="timeline-body">
                                                     <p>Uploaded timesheet shall be reviewed and approved by Internal
-                                                        staff and process your payroll.</u>.
+                                                        staff and process your payroll.
                                                     </p>
                                                 </div>
                                             </div>
@@ -347,13 +350,14 @@
                     </section>
 
                     <section class="row">
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee
-                            Management App
-                            Inc.,</a></div>
+                        <div class="col-12 mt-1 mb-4">Copy Right by
+                            <a href="http://www.Employee Management App.com/">
+                                Employee Management App Inc.,
+                            </a>
+                        </div>
                     </section>
                 </div>
             </section>
-
             <!-- Modal for Forwarding to the Dashboard page after successful submission of the Timesheet Information -->
             <div id="successModal" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog" id="my-account">
@@ -391,7 +395,7 @@
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
         crossorigin="anonymous"></script>
 <script src="./js/external/bootstrap.min.js"></script>
-<script src="./js/external/bootstrap-datepicker.js"></script>
+<script src="./js/external/bootstrap-datetimepicker.min.js"></script>
 <script src="./js/external/custom.js"></script>
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/addTimesheet.js"></script>

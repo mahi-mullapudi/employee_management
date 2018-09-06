@@ -233,54 +233,72 @@
                                     <h3 class="card-title">Timesheet Summary</h3>
                                     <hr>
 
-                                    <form>
+                                    <form:form method="POST" action="dashboard"
+                                               modelAttribute="dashboardSearch" id="dashboardForm">
 
-                                        <div class="form-group row">
-                                            <label for="selectFromDate" class="col-lg-2 col-form-label">
-                                                From Date:
-                                            </label>
-                                            <div class="col-lg-2">
-                                                <select class="form-control" id="selectFromDate" name="selectFromDate">
-                                                    <c:forEach var="fromDateMap" items="${weekStartDatesList}">
-                                                        <option value="${fromDateMap.key}">${fromDateMap.value}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
+                                        <div class="row">
+                                            <spring:bind path="fromDate">
+                                                <div class="form-group row col-lg-4 col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                    <label for="selectFromDate" class="col-sm-4 col-form-label">
+                                                        From Date:
+                                                    </label>
+                                                    <div class="inputGroupContainer col-sm-8">
+                                                        <form:select path="fromDate" items="${weekStartDatesList}"
+                                                                     id="selectFromDate"
+                                                                     class="form-control ${status.error ? 'form-control-danger' : ''}">
+                                                        </form:select>
+                                                        <div class="form-control-feedback">
+                                                            <form:errors path="fromDate"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </spring:bind>
 
-                                            <label for="selectToDate" class="col-lg-2 col-form-label">
-                                                To Date:
-                                            </label>
+                                            <spring:bind path="toDate">
+                                                <div class="form-group row col-lg-4 col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                    <label for="selectToDate" class="col-sm-4 col-form-label">
+                                                        From Date:
+                                                    </label>
+                                                    <div class="inputGroupContainer col-sm-8">
+                                                        <form:select path="toDate" items="${weekEndDatesList}"
+                                                                     id="selectToDate"
+                                                                     class="form-control ${status.error ? 'form-control-danger' : ''}">
+                                                        </form:select>
+                                                        <div class="form-control-feedback">
+                                                            <form:errors path="toDate"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </spring:bind>
 
-                                            <div class="col-lg-2">
-                                                <select class="form-control" id="selectToDate" name="selectToDate">
-                                                    <c:forEach var="toDateMap" items="${weekEndDatesList}">
-                                                        <option value="${toDateMap.key}">${toDateMap.value}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-
-                                            <label for="selectStatus"
-                                                   class="col-lg-1 col-form-label">Status:
-                                            </label>
-
-                                            <div class="col-lg-2">
-                                                <select class="form-control" id="selectStatus" name="selectStatus">
-                                                    <c:forEach var="timesheetStatus" items="${timesheetStatusList}">
-                                                        <option value="${timesheetStatus}">${timesheetStatus}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
+                                            <spring:bind path="timesheetStatus">
+                                                <div class="form-group row col-lg-4 col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                    <label for="selectStatus" class="col-sm-4 col-form-label">
+                                                        From Date:
+                                                    </label>
+                                                    <div class="inputGroupContainer col-sm-8">
+                                                        <form:select path="timesheetStatus"
+                                                                     items="${timesheetStatusList}"
+                                                                     id="selectStatus"
+                                                                     class="form-control ${status.error ? 'form-control-danger' : ''}">
+                                                        </form:select>
+                                                        <div class="form-control-feedback">
+                                                            <form:errors path="timesheetStatus"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </spring:bind>
 
                                         </div>
 
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="return loadSummaryTable();">Search
+                                                    onclick="return fetchData(event);">Search
                                             </button>
                                         </div>
                                         <br>
 
-                                    </form>
+                                    </form:form>
                                     <hr>
 
                                     <div class="table-responsive">
@@ -321,7 +339,8 @@
                         </div>
                     </section>
                     <section class="row">
-                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee Management App
+                        <div class="col-12 mt-1 mb-4">Copy Right by <a href="http://www.Employee Management App.com/">Employee
+                            Management App
                             Inc.,</a></div>
                     </section>
                 </div>
@@ -396,7 +415,6 @@
 <script src="./js/external/pdfmake.min.js"></script>
 <script src="./js/external/vfs_fonts.js"></script>
 <script src="./js/external/buttons.html5.min.js"></script>
-<script src="./js/external/bootstrap-datepicker.js"></script>
 <script src="./js/external/custom.js"></script>
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/dashboard-staff.js"></script>

@@ -4,6 +4,8 @@ import com.tutorialq.entities.ClientDetails;
 import com.tutorialq.entities.Employee;
 import com.tutorialq.entities.ImmigrationDetails;
 
+import java.util.List;
+
 public interface EmployeeService {
 
     /**
@@ -13,7 +15,7 @@ public interface EmployeeService {
      * @return
      * @throws Exception
      */
-    Employee getEmployeeByEmployeeId(long employeeId) throws Exception;
+    Employee getEmployeeById(long employeeId) throws Exception;
 
     /**
      * Returns true if the email already exist for an active Employee record.
@@ -24,9 +26,21 @@ public interface EmployeeService {
      */
     boolean checkIfEmployeeIdExists(String emailAddress) throws Exception;
 
+    /**
+     * Returns Client Details Summary for a given EmployeeId.
+     *
+     * @param employeeId
+     * @return
+     * @throws Exception
+     */
+    List<ClientDetails> getClientDetailsSummary(long employeeId) throws Exception;
 
     /**
      * Returns ClientDetails object for a given clientDetailsId object.
+     *
+     * @param clientDetailsId
+     * @return
+     * @throws Exception
      */
     ClientDetails getClientDetails(long clientDetailsId) throws Exception;
 
@@ -46,10 +60,26 @@ public interface EmployeeService {
     void saveClientDetails(ClientDetails clientDetails) throws Exception;
 
     /**
+     * Save Client Details by getting the Employee object and setting it.
+     *
+     * @throws Exception
+     */
+    void saveClientDetails(long employeeId, ClientDetails clientDetails) throws Exception;
+
+    /**
      * Save Immigration Details.
      *
      * @param immigrationDetails
      * @throws Exception
      */
     void saveImmigrationDetails(ImmigrationDetails immigrationDetails) throws Exception;
+
+    /**
+     * Returns the list of ImmigrationDetails for a given EmployeeId.
+     *
+     * @param empId
+     * @return
+     * @throws Exception
+     */
+    List<ImmigrationDetails> getImmigrationDetailsSummary(long empId) throws Exception;
 }

@@ -16,6 +16,15 @@ public interface TimesheetService {
     public void save(Timesheet timesheetObj) throws Exception;
 
     /**
+     * Returns the list of Timesheets for a given EmployeeId.
+     *
+     * @param employeeId
+     * @return
+     * @throws Exception
+     */
+    public List<Timesheet> getTimesheetsByEmpId(long employeeId) throws Exception;
+
+    /**
      * Returns the Timesheet information from the Timesheet table based on the given timesheetId.
      *
      * @param timesheetId

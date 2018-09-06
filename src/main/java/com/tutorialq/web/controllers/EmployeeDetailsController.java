@@ -24,7 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -49,7 +49,7 @@ public class EmployeeDetailsController {
     public String getEmployeeDetails(@RequestParam("empId") long empId,
                                      Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside getEmployeeDetails method of EmployeeDetails Controller:: empId: " + empId);
-        Employee employeeDetails = employeeService.getEmployeeByEmployeeId(empId);
+        Employee employeeDetails = employeeService.getEmployeeById(empId);
         model.addAttribute("employeeDetails", employeeDetails);
         //Initiating ModelAndView object with the Employee object
         return "staff/employeeDetails";
@@ -68,7 +68,6 @@ public class EmployeeDetailsController {
 
         log.info("The form has no errors, so persisting the data.");
         try {
-            employeeDetails.setDateLastModified(LocalDateTime.now());
             employeeDetails.setNameLastModified(employeeDetails.getEmployeeFullName());
             log.info("Saving the registration details of the Employee.");
             registrationService.saveRegistrationDetails(employeeDetails);
@@ -91,29 +90,59 @@ public class EmployeeDetailsController {
         return "redirect:/employeeDetails?empId=" + employeeDetails.getEmployeeId();
     }
 
+    @GetMapping("clientDetailsSummary")
+    public String getClientDetailsSummary(@RequestParam("empId") long empId,
+                                          Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+        log.info("Inside the getClientDetailsSummary method of Employee Details Controller:: empId: " + empId);
+        List<ClientDetails> clientDetailsList = employeeService.getClientDetailsSummary(empId);
+        model.addAttribute("clientDetailsSummary", clientDetailsList);
+        if (clientDetailsList.size() > 0) {
+            model.addAttribute("clientDetails", clientDetailsList.get(0));
+        }
+        return "staff/clientDetails";
+    }
+
     @GetMapping("/clientDetails")
     public String getClientDetails(@RequestParam("empId") long empId,
+                                   @RequestParam(value = "clientDetailsId", required = false) long clientDetailsId,
                                    Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside getClientDetails method of EmployeeDetails Controller:: empId: " + empId);
-        Employee employee = employeeService.getEmployeeByEmployeeId(empId);
-        model.addAttribute("employeeDetails", employee);
-        model.addAttribute("clientDetails", employeeService.getClientDetails(empId));
+        Employee employee = (Employee) session.getAttribute("user");
+        //Check if the employee object exist or not one of the Supervisor role or Admin role.
+        if (employee == null || (!employee.isSupervisorRole() && !employee.isAdminRole())) {
+            log.error("Cannot find employee object in the session, so forwarding to Login page");
+            redirectAttributes.addFlashAttribute("css", "danger");
+            redirectAttributes.addFlashAttribute("msg", "Your role do not have access to view the Client Details. Please login as Supervisor/Admin to continue.");
+            return "redirect:/login";
+        }
+        ClientDetails clientDetails = clientDetailsId != 0 ? employeeService.getClientDetails(clientDetailsId) : new ClientDetails();
+        clientDetails.setEmployee(employeeService.getEmployeeById(empId));
+        model.addAttribute("clientDetails", clientDetails);
         return "staff/clientDetails";
     }
 
     @PostMapping("/clientDetails")
     public String submitClientDetails(
             @ModelAttribute("clientDetails") ClientDetails clientDetails, BindingResult result,
-            SessionStatus status, Model model, RedirectAttributes redirectAttributes) throws Exception {
+            SessionStatus status, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside submitClientDetails method of EmployeeDetails Controller:: clientDetails: " + clientDetails.getClientDetailsId());
+        Employee employee = (Employee) session.getAttribute("user");
+        //Check if the employee object exist or not one of the Supervisor role or Admin role.
+        if (employee == null || (!employee.isAdminRole())) {
+            log.error("Cannot find employee object in the session, so forwarding to Login page");
+            redirectAttributes.addFlashAttribute("css", "danger");
+            redirectAttributes.addFlashAttribute("msg", "Your role do not have access to update the Client Details. Please login as Admin to continue.");
+            return "redirect:/login";
+        }
         clientDetailsValidator.validate(clientDetails, result);
         if (result.hasErrors()) {
+            log.warn("Validation errors: " + result.toString());
             model.addAttribute("css", "danger");
-            model.addAttribute("msg", "Invalid / Missing Information. Please correct the information entered below!!");
+            model.addAttribute("msg", "Invalid / Missing Information. Please correct the Client details information below!!");
             return "staff/clientDetails";
         }
         try {
-            log.info("Saving the registration details of the Employee.");
+            log.info("No errors found. Saving the Client details of the Employee.");
             employeeService.saveClientDetails(clientDetails);
             status.setComplete();
         } catch (Exception ex) {
@@ -134,16 +163,32 @@ public class EmployeeDetailsController {
     public String getImmigrationDetails(@RequestParam("empId") long empId,
                                         Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside getImmigrationDetails method of EmployeeDetails Controller:: empId: " + empId);
-        ImmigrationDetails immigrationDetails = employeeService.getImmigrationDetails(empId);
-        model.addAttribute("immigrationDetails", immigrationDetails);
+        Employee employee = (Employee) session.getAttribute("user");
+        //Check if the employee object exist or not one of the Supervisor role or Admin role.
+        if (employee == null || (!employee.isSupervisorRole() && !employee.isAdminRole())) {
+            log.error("Cannot find employee object in the session, so forwarding to Login page");
+            redirectAttributes.addFlashAttribute("css", "danger");
+            redirectAttributes.addFlashAttribute("msg", "Your role do not have access to view the Immigration Details. Please login as Supervisor/Admin to continue.");
+            return "redirect:/login";
+        }
+        List<ImmigrationDetails> immigrationDetailsList = employeeService.getImmigrationDetailsSummary(empId);
+        model.addAttribute("immigrationDetailsSummary", immigrationDetailsList);
         return "staff/immigrationDetails";
     }
 
     @PostMapping("/immiDetails")
     public String submitImmigrationDetails(
             @ModelAttribute("clientDetails") ImmigrationDetails immigrationDetails, BindingResult result,
-            SessionStatus status, Model model, RedirectAttributes redirectAttributes) throws Exception {
+            SessionStatus status, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside immigrationDetails method of EmployeeDetails Controller:: immigrationDetailsId: " + immigrationDetails.getImmiDetailsId());
+        Employee employee = (Employee) session.getAttribute("user");
+        //Check if the employee object exist or not one of the Supervisor role or Admin role.
+        if (employee == null || (!employee.isAdminRole())) {
+            log.error("Cannot find employee object in the session, so forwarding to Login page");
+            redirectAttributes.addFlashAttribute("css", "danger");
+            redirectAttributes.addFlashAttribute("msg", "Your role do not have access to update the Immigration Details. Please login as Admin to continue.");
+            return "redirect:/login";
+        }
         clientDetailsValidator.validate(immigrationDetails, result);
         if (result.hasErrors()) {
             model.addAttribute("css", "danger");
@@ -165,7 +210,7 @@ public class EmployeeDetailsController {
         redirectAttributes.addFlashAttribute("msg", "You have successfully updated Employee Details.");
         redirectAttributes.addFlashAttribute("css", "success");
 
-        return "redirect:/clientDetails?empId=" + immigrationDetails.getEmployee().getEmployeeId();
+        return "redirect:/immiDetails?empId=" + immigrationDetails.getEmployee().getEmployeeId();
     }
 
     @ModelAttribute("skillSetMap")

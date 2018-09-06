@@ -12,15 +12,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Entity
 @ToString(exclude = {"empPassword", "empPassword2"})
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee implements Serializable {
+public class Employee extends AuditModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employee_id", unique = true, nullable = false)
@@ -60,28 +58,12 @@ public class Employee implements Serializable {
     private LocalDate dateInactivated;
     private String nameUserInactivated; // Who inactivated this user
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private Set<Timesheet> timesheetRecords = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private Set<ClientDetails> clientDetails = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private Set<DocumentUpload> documentUploads = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private Set<ImmigrationDetails> immigrationDetails = new HashSet<>(0);
-
     public String getEmployeeFullName() {
         return (StringUtils.isNotBlank(this.employeeFirstName) ? this.employeeFirstName : "") +
                 " " + (StringUtils.isNotBlank(this.employeeLastName) ? this.employeeLastName : "");
     }
 
     //Audit Information
-    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
-    private LocalDateTime dateCreated;
-    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
-    private LocalDateTime dateLastModified;
     @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateApproved;
     private String nameCreated;

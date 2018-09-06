@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -94,8 +93,8 @@ public class TimesheetRestController {
     public ResponseEntity<List<Timesheet>> getTimesheetSummary(@RequestParam("employeeId") long employeeId) {
         log.info("Inside getTimesheetSummary method of TimesheetRestController:: employeeId: " + employeeId);
         try {
-            Employee employee = employeeService.getEmployeeByEmployeeId(employeeId);
-            return new ResponseEntity(new ArrayList(employee.getTimesheetRecords()), new HttpHeaders(), HttpStatus.OK);
+            List<Timesheet> timesheetList = timesheetService.getTimesheetsByEmpId(employeeId);
+            return new ResponseEntity(timesheetList, new HttpHeaders(), HttpStatus.OK);
         } catch (Exception ex) {
             log.error("Exception while getting Timesheet Summary: " + ex);
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -136,7 +135,7 @@ public class TimesheetRestController {
         log.info("Inside getTimesheetByEndDate method of TimesheetRestController:: endDate: " + endDate
                 + "employeeId: " + employeeId);
         try {
-            Employee employeeObj = employeeService.getEmployeeByEmployeeId(employeeId);
+            Employee employeeObj = employeeService.getEmployeeById(employeeId);
             Timesheet timesheet = timesheetService.getTimesheetByEndDate(endDate, employeeObj);
             return new ResponseEntity(timesheet, new HttpHeaders(), HttpStatus.OK);
         } catch (Exception ex) {
@@ -155,8 +154,10 @@ public class TimesheetRestController {
      * @throws Exception
      */
     @GetMapping("/timesheetSummaryStaff")
-    public ResponseEntity<Timesheet> getTimesheetSummaryStaff(@RequestParam("fromDate") LocalDate fromDate, @RequestParam("toDate") LocalDate toDate,
-                                                              @RequestParam("timesheetStatus") String timesheetStatus) throws Exception {
+    public ResponseEntity<Timesheet> getTimesheetSummaryStaff(
+            @RequestParam("fromDate") @DateTimeFormat(pattern = "MM/dd/yyyy") LocalDate fromDate,
+            @RequestParam("toDate") @DateTimeFormat(pattern = "MM/dd/yyyy") LocalDate toDate,
+            @RequestParam("timesheetStatus") String timesheetStatus) throws Exception {
         log.info("Inside getTimesheetSummaryStaff method of Timesheet Rest Controller:: fromDate: " + fromDate +
                 " toDate: " + toDate + " timesheetStatus: " + timesheetStatus);
         try {
