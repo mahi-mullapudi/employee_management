@@ -101,7 +101,7 @@ function populateViewTimesheet(timesheetObj) {
         $('#extraHours').html(timesheetObj.extraHours);
         $('#totalHours').html(timesheetObj.regularHours + timesheetObj.extraHours);
         $('#submitterName').html(timesheetObj.nameCreated);
-        $('#submittedDate').html(timesheetObj.dateCreated != null ? moment(timesheetObj.dateCreated).format("MM/DD/YYYY hh:mm a") : '');
+        $('#submittedDate').html(timesheetObj.createdAt != null ? moment(timesheetObj.createdAt).format("MM/DD/YYYY hh:mm a") : '');
         $('#approvalDate').html(timesheetObj.dateApproved != null ? moment(timesheetObj.dateApproved).format("MM/DD/YYYY hh:mm a") : '');
         $('#timesheetComments').html(timesheetObj.dscComments);
         $('#uploadedTimesheetName').html(timesheetObj.dscFileName);

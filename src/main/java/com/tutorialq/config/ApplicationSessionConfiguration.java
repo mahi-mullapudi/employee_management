@@ -10,6 +10,6 @@ import javax.servlet.http.HttpSessionListener;
 public class ApplicationSessionConfiguration {
     @Bean
     public ServletListenerRegistrationBean<HttpSessionListener> sessionListener() {
-        return new ServletListenerRegistrationBean<HttpSessionListener>(new SessionListener());
+        return new ServletListenerRegistrationBean<>(new SessionListener());
     }
 }

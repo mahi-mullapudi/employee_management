@@ -64,9 +64,9 @@ public class ApplicationConstants implements Serializable {
 
     public static final String INIT_VECTOR_RANDOM_KEY = "RandomInitVector"; // 16 bytes IV any random String with 16 characters can be used.
 
-    public static final String MAX_UPLOAD_FILE_SIZE = "1000000"; // 5MB file limit.
+    public static final String MAX_UPLOAD_FILE_SIZE = "1000000"; // 10MB file limit.
 
-    public static final String fromAddress = "admin@tutorialq.com";
+    public static final String fromAddress = "admin@geeksoft.com";
 
     public static final Map<String, String> skillMap = ImmutableMap.<String, String>builder()
             .put("java", "Java")
@@ -76,6 +76,7 @@ public class ApplicationConstants implements Serializable {
             .put("qa", "Quality Assurance")
             .put("ba", "Business Analyst")
             .build();
+
     public static final Map<String, String> companyNamesMap = ImmutableMap.<String, String>builder()
             .put("geeksoft", "Geeksoft LLC.,")
             .put("datasols", "DataSols LLC.,")

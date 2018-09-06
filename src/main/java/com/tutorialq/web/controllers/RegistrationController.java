@@ -52,8 +52,8 @@ public class RegistrationController {
     public ModelAndView getRegistration() {
         log.info("Inside getRegistration method of Registration Controller.");
         Employee employeeRegistration = new Employee();
-        employeeRegistration.setEmployeeRoleId(100);
-        employeeRegistration.setEmployeeRoleDesc("EMPLOYEE");
+        employeeRegistration.setEmployeeRoleId(ApplicationConstants.USER_ROLE_EMPLOYEE_ID);
+        employeeRegistration.setEmployeeRoleDesc(ApplicationConstants.USER_ROLE_EMPLOYEE);
         log.info("Completed setting required parameter values.");
         //Initiating ModelAndView object with the Employee object
         return new ModelAndView("registration", "employee", employeeRegistration);
@@ -62,11 +62,7 @@ public class RegistrationController {
     @GetMapping("/staffRegistration")
     public ModelAndView getStaffRegistration(ModelMap modelMap) {
         log.info("Inside getStaffRegistration method of Registration Controller.");
-        Map<Integer, String> roleIdDescMap = new TreeMap<>();
-        roleIdDescMap.put(ApplicationConstants.USER_ROLE_SUPERVISOR_ID, ApplicationConstants.USER_ROLE_SUPERVISOR);
-        roleIdDescMap.put(ApplicationConstants.USER_ROLE_ADMIN_ID, ApplicationConstants.USER_ROLE_ADMIN);
 
-        modelMap.addAttribute("roleIdDescMap", roleIdDescMap);
         modelMap.addAttribute("employee", new Employee());
         //Initiating ModelAndView object with the Employee object
         return new ModelAndView("registration-staff", modelMap);
@@ -87,6 +83,10 @@ public class RegistrationController {
         try {
             employeeRegistration.setAccountStatusFlag(ApplicationConstants.REGISTRATION_STATUS_ACTIVE);
             employeeRegistration.setNameCreated(employeeRegistration.getEmployeeFullName());
+            if (employeeRegistration.getEmployeeRoleId() != ApplicationConstants.USER_ROLE_EMPLOYEE_ID) {
+                Map<Integer, String> roleDescMap = getRoleDescMap();
+                employeeRegistration.setEmployeeRoleDesc(roleDescMap.get(employeeRegistration.getEmployeeRoleId()));
+            }
             log.info("Saving the registration details of the Employee.");
             registrationService.saveRegistrationDetails(employeeRegistration);
             emailService.sendPlainTextMailWithoutAttachment(ApplicationConstants.fromAddress, employeeRegistration.getEmployeeEmailId(),
@@ -290,6 +290,15 @@ public class RegistrationController {
                 "This is to let you know that your password is updated successfully.");
         return new ModelAndView("updatePassword");
 
+    }
+
+    @ModelAttribute("roleIdDescMap")
+    public Map<Integer, String> getRoleDescMap() {
+        Map<Integer, String> roleIdDescMap = new TreeMap<>();
+        roleIdDescMap.put(ApplicationConstants.USER_ROLE_SUPERVISOR_ID, ApplicationConstants.USER_ROLE_SUPERVISOR);
+        roleIdDescMap.put(ApplicationConstants.USER_ROLE_ADMIN_ID, ApplicationConstants.USER_ROLE_ADMIN);
+
+        return roleIdDescMap;
     }
 
 
