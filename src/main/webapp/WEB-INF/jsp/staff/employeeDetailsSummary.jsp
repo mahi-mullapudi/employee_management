@@ -78,6 +78,7 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>Company Name</th>
+                                                <th>Employee Title</th>
                                                 <th>View/Edit</th>
                                             </tr>
                                             </thead>
@@ -89,6 +90,7 @@
                                                 <th>Email</th>
                                                 <th>Phone</th>
                                                 <th>Company Name</th>
+                                                <th>Employee Title</th>
                                                 <th>View/Edit</th>
                                             </tr>
                                             </tfoot>

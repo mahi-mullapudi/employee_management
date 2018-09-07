@@ -56,6 +56,14 @@ public class EmployeeDetailsController {
         log.info("Inside getEmployeeDetails method of EmployeeDetails Controller:: empId: " + empId);
         Employee employeeDetails = employeeService.getEmployeeById(empId);
         model.addAttribute("employeeDetails", employeeDetails);
+        //Adding client details model attribute.
+        ClientDetail clientDetails = new ClientDetail();
+        clientDetails.setEmployee(employeeService.getEmployeeById(empId));
+        model.addAttribute("clientDetails", clientDetails);
+        //Adding Immigration details model attribute.
+        List<ImmigrationDetail> immigrationDetailsList = employeeService.getImmigrationDetailsSummary(empId);
+        model.addAttribute("immigrationDetails", new ImmigrationDetail());
+        model.addAttribute("immigrationDetailsSummary", immigrationDetailsList);
         //Initiating ModelAndView object with the Employee object
         return "staff/employeeDetails";
     }

@@ -42,6 +42,9 @@ function fetchEmpDetails() {
                 data: 'companyName'
             },
             {
+                data: 'employeeTitle',
+            },
+            {
                 data: 'employeeId',
                 mRender: function (data, type, row) {
                     var link = "<a href=\"/employeeManagement/employeeDetails?empId=" + data + "\" target=\"_blank\" class=\"btn btn-link\">View</a>";

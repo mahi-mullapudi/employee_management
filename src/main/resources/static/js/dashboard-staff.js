@@ -153,7 +153,7 @@ function approveTimesheet() {
         success: function (responsedata) {
             console.log("Inside success function of Approve Timesheet.");
             getTimesheetInfoById(timesheetId, true); //To reload the View Timesheet information.
-            loadSummaryTable();
+            fetchData();
             $('#successModal').modal('show');
             $('#alertDiv').show();
             $('#alertSubDiv').addClass(responsedata.responseClass);
@@ -191,7 +191,7 @@ function rejectTimesheet() {
         success: function (responsedata) {
             console.log("Inside success function of Reject Timesheet.");
             getTimesheetInfoById(timesheetId, true); //To reload the View Timesheet information.
-            loadSummaryTable();
+            fetchData();
             $('#rejectionModal').modal('show');
             $('#alertDiv').show();
             $('#alertSubDiv').addClass(responsedata.responseClass);
