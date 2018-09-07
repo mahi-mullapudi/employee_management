@@ -17,7 +17,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/employeeManagement/employeeDetails">
+            <a class="nav-link" href="/employeeManagement/employeeDetailsSummary">
                 <em class="fa fa-bar-chart"></em> Employee Details
             </a>
         </li>

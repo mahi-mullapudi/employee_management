@@ -31,8 +31,7 @@
                         <hr>
                     </div>
                     <div class="col-md-12">
-                        <h4 class="subheading"> Welcome to Employee Management App. Please create your Account
-                            to continue. </h4>
+                        <h4>Employee Details</h4>
                         <hr>
                         <c:if test="${not empty msg}">
                             <div class="col-md-12">

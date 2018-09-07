@@ -99,107 +99,102 @@
                             <div class="jumbotron">
                                 <h1 class="mb-4">Employee Details</h1>
 
-                                <form>
-                                    <input type="hidden" id="employeeId" value="${user.employeeId}">
-                                    <input type="hidden" id="currentEndDate" value="${currentEndDate}">
+                                <input type="hidden" id="employeeId" value="${user.employeeId}">
+                                <input type="hidden" id="currentEndDate" value="${currentEndDate}">
 
-                                    <div class="form-group row">
-                                        <label class="col-lg-2 form-control-label">Employee Name </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.employeeFirstName} ${user.employeeLastName} </span>
-                                        </div>
-
-                                        <label class="col-lg-2 form-control-label">Employee Id </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.assignedEmployeeId} </span>
-                                        </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-2 form-control-label">Employee Name </label>
+                                    <div class="col-lg-4">
+                                        <span> ${user.employeeFirstName} ${user.employeeLastName} </span>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-lg-2 form-control-label">Email </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.employeeEmailId} </span>
-                                        </div>
+                                    <label class="col-lg-2 form-control-label">Employee Id </label>
+                                    <div class="col-lg-4">
+                                        <span> ${user.assignedEmployeeId} </span>
+                                    </div>
+                                </div>
 
-                                        <label class="col-lg-2 form-control-label">Phone </label>
-                                        <div class="col-lg-4">
-                                            <span> ${user.employeePhone} </span>
-                                        </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-2 form-control-label">Email </label>
+                                    <div class="col-lg-4">
+                                        <span> ${user.employeeEmailId} </span>
                                     </div>
 
-                                </form>
+                                    <label class="col-lg-2 form-control-label">Phone </label>
+                                    <div class="col-lg-4">
+                                        <span> ${user.employeePhone} </span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="card mb-4" id="viewTimesheet">
                                 <div class="card-block">
                                     <h3 class="card-title mb-4">View Timesheet</h3>
 
-                                    <form>
-                                        <div class="form-group row">
-                                            <label for="selectedTimePeriod" class="col-lg-2 form-control-label">
-                                                Selected TimePeriod :
-                                            </label>
-                                            <div class="col-lg-2">
-                                                <span id="selectedTimePeriod"></span>
-                                            </div>
-
-                                            <label class="col-lg-2 form-control-label">Status : </label>
-                                            <div class="col-lg-2">
-                                                <span id="timesheetStatus"></span>
-                                            </div>
+                                    <div class="form-group row">
+                                        <label for="selectedTimePeriod" class="col-lg-2 form-control-label">
+                                            Selected TimePeriod :
+                                        </label>
+                                        <div class="col-lg-2">
+                                            <span id="selectedTimePeriod"></span>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-lg-2 form-control-label">Regular
-                                                Hours : </label>
-                                            <div class="col-lg-2">
-                                                <span id="regularHours"></span>
-                                            </div>
+                                        <label class="col-lg-2 form-control-label">Status : </label>
+                                        <div class="col-lg-2">
+                                            <span id="timesheetStatus"></span>
+                                        </div>
+                                    </div>
 
-                                            <label class="col-lg-2 form-control-label">Extra
-                                                Hours : </label>
-                                            <div class="col-lg-2">
-                                                <span id="extraHours"></span>
-                                            </div>
-
-                                            <label class="col-lg-2 form-control-label">Total
-                                                Hours : </label>
-                                            <div class="col-lg-2">
-                                                <span id="totalHours"></span>
-                                            </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 form-control-label">Regular
+                                            Hours : </label>
+                                        <div class="col-lg-2">
+                                            <span id="regularHours"></span>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-lg-2 form-control-label">Submitted By : </label>
-                                            <div class="col-lg-2">
-                                                <span id="submitterName"></span>
-                                            </div>
-
-                                            <label class="col-lg-2 form-control-label">Submitted On : </label>
-                                            <div class="col-lg-2">
-                                                <span id="submittedDate"></span>
-                                            </div>
-
-                                            <label class="col-lg-2 form-control-label">Approved On : </label>
-                                            <div class="col-lg-2">
-                                                <span id="approvalDate"></span>
-                                            </div>
+                                        <label class="col-lg-2 form-control-label">Extra
+                                            Hours : </label>
+                                        <div class="col-lg-2">
+                                            <span id="extraHours"></span>
                                         </div>
-                                        <br>
 
-                                        <div class="form-group row" id="uploadedTimesheet">
-                                            <a href="" target="_blank" id="uploadTimesheetLink">
-                                                Click here to access the uploaded timesheet:
-                                                <span id="uploadedTimesheetName"></span>
-                                            </a>
+                                        <label class="col-lg-2 form-control-label">Total
+                                            Hours : </label>
+                                        <div class="col-lg-2">
+                                            <span id="totalHours"></span>
                                         </div>
-                                        <br>
-                                        <div class="form-group">
-                                            <label for="timesheetComments">Comments : </label>
-                                            <textarea class="form-control col-xl-8" id="timesheetComments"
-                                                      rows="3" readonly></textarea>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-2 form-control-label">Submitted By : </label>
+                                        <div class="col-lg-2">
+                                            <span id="submitterName"></span>
                                         </div>
-                                    </form>
+
+                                        <label class="col-lg-2 form-control-label">Submitted On : </label>
+                                        <div class="col-lg-2">
+                                            <span id="submittedDate"></span>
+                                        </div>
+
+                                        <label class="col-lg-2 form-control-label">Approved On : </label>
+                                        <div class="col-lg-2">
+                                            <span id="approvalDate"></span>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group row" id="uploadedTimesheet">
+                                        <a href="" target="_blank" id="uploadTimesheetLink">
+                                            Click here to access the uploaded timesheet:
+                                            <span id="uploadedTimesheetName"></span>
+                                        </a>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="timesheetComments">Comments : </label>
+                                        <textarea class="form-control col-xl-8" id="timesheetComments"
+                                                  rows="3" readonly></textarea>
+                                    </div>
                                 </div>
 
                             </div>
@@ -234,7 +229,6 @@
                                                 <th>View</th>
                                             </tr>
                                             </tfoot>
-
                                         </table>
                                     </div>
 
@@ -262,9 +256,9 @@
 <script src="./js/external/bootstrap.min.js"></script>
 <script src="./js/external/jquery.dataTables.min.js"></script>
 <script src="./js/external/dataTables.bootstrap4.min.js"></script>
+<script src="./js/external/moment.min.js"></script>
 <script src="./js/external/bootstrap-datetimepicker.min.js"></script>
 <script src="./js/external/custom.js"></script>
-<script src="./js/external/moment.min.js"></script>
 <script src="./js/dashboard.js"></script>
 </body>
 </html>
