@@ -51,10 +51,11 @@ $(document).ready(function () {
  */
 function getTimesheetByEndDate(endDate) {
     var employeeId = $('#employeeId').val();
-    console.log("Inside getTimesheetByEndDate method:: endDate: " + endDate + " employeeId: " + employeeId);
+    var endDateFormatted = moment(endDate).format("MM/DD/YYYY");
+    console.log("Inside getTimesheetByEndDate method:: endDate: " + endDateFormatted + " employeeId: " + employeeId);
     $.ajax({
         type: 'GET',
-        url: '/employeeManagement/api/getTimesheetByEndDate?endDate=' + endDate + "&employeeId=" + employeeId,
+        url: '/employeeManagement/api/getTimesheetByEndDate?endDate=' + endDateFormatted + "&employeeId=" + employeeId,
         success: function (responsedata) {
             console.log("Inside success function after getting the timesheet info.");
             populateViewTimesheet(responsedata);

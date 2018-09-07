@@ -207,8 +207,8 @@
                                     <h3 class="card-title">Timesheet Summary</h3>
                                     <hr>
 
-                                    <form:form method="POST" action="dashboard"
-                                               modelAttribute="dashboardSearch" id="dashboardForm">
+                                    <form:form method="POST" action="dashboard" modelAttribute="dashboardSearch"
+                                               id="dashboardForm">
 
                                         <div class="row">
                                             <spring:bind path="fromDate">

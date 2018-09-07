@@ -15,4 +15,8 @@ public class QueryProperties {
             + " emp.employeeTitle = :employeeTitle, "
             + " emp.employeePhone = :employeePhone "
             + " WHERE emp.employeeId = :employeeId";
+
+    public final static String updatePassword = "UPDATE Employee emp "
+            + " SET emp.empPassword = :password "
+            + " WHERE emp.employeeEmailId = :emailId";
 }

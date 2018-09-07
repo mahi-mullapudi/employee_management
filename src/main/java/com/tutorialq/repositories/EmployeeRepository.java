@@ -18,7 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     int countEmployeeByEmployeeEmailIdAndEmpPassword(String emailId, String password);
 
     @Modifying
-    @Query("UPDATE Employee emp SET emp.empPassword = :password where emp.employeeEmailId = :emailId")
+    @Query(QueryProperties.updatePassword)
     int updatePassword(@Param("password") String password, @Param("emailId") String emailId);
 
     @Modifying
