@@ -15,7 +15,7 @@ public interface AuthenticationService {
      * @return
      * @throws Exception
      */
-    public boolean checkEmailIdExists(String emailId) throws Exception;
+    boolean checkEmailIdExists(String emailId) throws Exception;
 
     /**
      * Authenticates the user based on emailId and password entered in the Login page.
@@ -25,7 +25,7 @@ public interface AuthenticationService {
      * @return
      * @throws Exception
      */
-    public boolean authenticatedLogin(String emailId, String password) throws Exception;
+    boolean authenticatedLogin(String emailId, String password) throws Exception;
 
     /**
      * Get Employee details by EmailId.
@@ -34,5 +34,5 @@ public interface AuthenticationService {
      * @return
      * @throws Exception
      */
-    public Employee getEmployeeByEmailId(String emailId) throws Exception;
+    Employee getEmployeeByEmailId(String emailId) throws Exception;
 }

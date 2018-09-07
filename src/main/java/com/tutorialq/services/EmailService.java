@@ -1,9 +1,8 @@
 package com.tutorialq.services;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * Common Mail Service to send mails.
@@ -27,7 +26,7 @@ public interface EmailService {
      * @param subject     String
      * @param mailContent String
      */
-    public void sendPlainTextMailWithoutAttachment(String fromAddress, String toAddress, String ccAddress, String subject, String mailContent);
+    void sendPlainTextMailWithoutAttachment(String fromAddress, String toAddress, String ccAddress, String subject, String mailContent);
 
     /**
      * Service method to send plain text mail <b>WITH</b> multiple attachments.
@@ -41,7 +40,7 @@ public interface EmailService {
      *                    For single files add it to list.
      *                    Ex: Arrays.asList(uploadedFile)
      */
-    public void sendPlainTextMailWithAttachment(String fromAddress, String toAddress, String ccAddress, String subject, String mailContent, List<MultipartFile> attachFiles);
+    void sendPlainTextMailWithAttachment(String fromAddress, String toAddress, String ccAddress, String subject, String mailContent, List<MultipartFile> attachFiles);
 
     /**
      * Service method to send simple plain text mail to multiple recipients
@@ -53,7 +52,7 @@ public interface EmailService {
      * @param subject     String
      * @param mailContent String of mail content.
      */
-    public void sendBulkPlainTextMailWithoutAttachment(String fromAddress, List<String> toAddress, List<String> ccAddress, String subject, String mailContent);
+    void sendBulkPlainTextMailWithoutAttachment(String fromAddress, List<String> toAddress, List<String> ccAddress, String subject, String mailContent);
 
     /**
      * Service method to send simple plain text mail to multiple recipients
@@ -68,7 +67,7 @@ public interface EmailService {
      *                    For single files add it to list.
      *                    Ex: Arrays.asList(uploadedFile)
      */
-    public void sendBulkPlainTextMailWithAttachment(String fromAddress, List<String> toAddress, List<String> ccAddress, String subject, String mailContent, List<MultipartFile> attachFiles);
+    void sendBulkPlainTextMailWithAttachment(String fromAddress, List<String> toAddress, List<String> ccAddress, String subject, String mailContent, List<MultipartFile> attachFiles);
 
     /**
      * @param fromAddress
@@ -78,6 +77,6 @@ public interface EmailService {
      * @param mailContent
      * @throws Exception
      */
-    public void sendMimeMailWithoutAttachment(String fromAddress, List<String> toAddress, List<String> ccAddress, String subject, String mailContent, boolean isMailHtml) throws Exception;
+    void sendMimeMailWithoutAttachment(String fromAddress, List<String> toAddress, List<String> ccAddress, String subject, String mailContent, boolean isMailHtml) throws Exception;
 }
 
