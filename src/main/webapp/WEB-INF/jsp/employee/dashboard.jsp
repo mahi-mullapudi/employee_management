@@ -110,7 +110,7 @@
 
                                     <label class="col-lg-2 form-control-label">Employee Id </label>
                                     <div class="col-lg-4">
-                                        <span> ${user.assignedEmployeeId} </span>
+                                        <span> ${user.employeeId} </span>
                                     </div>
                                 </div>
 

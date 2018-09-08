@@ -58,10 +58,11 @@ public class Timesheet extends AuditModel implements Serializable {
     private Employee employee;
     //Audit Information
     @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
+    private LocalDateTime dateSubmitted;
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     private LocalDateTime dateApproved;
     private String nameCreated; //Name of the user Uploaded the timesheet.
     private String nameLastModified;
     private String nameApproved;
-
 
 }

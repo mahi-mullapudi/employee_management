@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -97,6 +98,7 @@ public class TimesheetController {
             timesheetObj.setDscFileName(file.getOriginalFilename());
             timesheetObj.setTimesheetStatus(ApplicationConstants.TIMESHEET_STATUS_SUBMITTED);
             timesheetObj.setTimesheetType(ApplicationConstants.TIMESHEET_TYPE_WEEKLY);
+            timesheetObj.setDateSubmitted(LocalDateTime.now());
             timesheetObj.setNameCreated(employee.getEmployeeFullName());
             timesheetObj.setEmployee(employee);
 

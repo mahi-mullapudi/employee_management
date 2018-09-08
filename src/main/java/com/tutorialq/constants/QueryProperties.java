@@ -18,5 +18,5 @@ public class QueryProperties {
 
     public final static String updatePassword = "UPDATE Employee emp "
             + " SET emp.empPassword = :password "
-            + " WHERE emp.employeeEmailId = :emailId";
+            + " WHERE UPPER(emp.employeeEmailId) = UPPER(:emailId)";
 }

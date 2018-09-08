@@ -38,7 +38,7 @@ function populateTimesheetInfo(timesheetObj) {
     //Populate the HTML information.
     $('#timesheetStatus').html(timesheetObj.timesheetStatus != null ? timesheetObj.timesheetStatus : '');
     $('#submitterName').html(timesheetObj.nameCreated !== null ? timesheetObj.nameCreated : '');
-    $('#submittedDate').html(timesheetObj.createdAt !== null ? moment(timesheetObj.createdAt).format("MM/DD/YYYY hh:mm a") : '');
+    $('#submittedDate').html(timesheetObj.dateSubmitted !== null ? moment(timesheetObj.dateSubmitted).format("MM/DD/YYYY hh:mm a") : '');
     $('#approverName').html(timesheetObj.nameApproved !== null ? timesheetObj.nameApproved : '');
     $('#approvalDate').html(timesheetObj.dateApproved !== null ? moment(timesheetObj.dateApproved).format("MM/DD/YYYY hh:mm a") : '');
     //Populate the input values.

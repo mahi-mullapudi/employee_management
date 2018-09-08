@@ -40,14 +40,14 @@ public class EmployeeDetailsValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "skillSet", "NotEmpty.registration.skillSet");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "companyName", "NotEmpty.registration.companyName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employmentType", "NotEmpty.registration.employmentType");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "NotEmpty.registration.phoneNum");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeePhone", "NotEmpty.registration.phoneNum");
 
         Employee employeeDetails = (Employee) target;
 
         //Email Validation
         if (!emailValidator.validate(employeeDetails.getEmployeeEmailId())) {
             errors.rejectValue("employeeEmailId", "NotValid.registration.email");
-        } else {
+        } /*else {
             //Check if the Email Id has an already associated linked account.
             try {
                 if (employeeService.checkIfEmployeeIdExists(employeeDetails.getEmployeeEmailId())) {
@@ -57,7 +57,7 @@ public class EmployeeDetailsValidator implements Validator {
                 log.error("Exception while checking if the email id already exist:: ");
                 errors.rejectValue("employeeEmailId", "Error.checking.registration.email");
             }
-        }
+        }*/
 
         if (!StringUtils.isBlank(employeeDetails.getEmployeePhone())) {
             String phoneNumber = employeeDetails.getEmployeePhone().replaceAll("[()-]", "");
@@ -66,10 +66,9 @@ public class EmployeeDetailsValidator implements Validator {
             }
         }
 
-        if (employeeDetails.getEmployeeStartDate() == null) {
-            errors.rejectValue("employeeStartDate", "NotEmpty.registration.employeeStartDate");
+        if (employeeDetails.getEmploymentStartDate() == null) {
+            errors.rejectValue("employmentStartDate", "NotEmpty.registration.employeeStartDate");
         }
-
 
     }
 }
