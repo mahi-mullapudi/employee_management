@@ -180,16 +180,16 @@ public class EmployeeDetailsController {
             redirectAttributes.addFlashAttribute("msg", "Your role do not have access to view the Immigration Details. Please login as Supervisor/Admin to continue.");
             return "redirect:/login";
         }
-        List<ImmigrationDetail> immigrationDetailsList = employeeService.getImmigrationDetailsSummary(empId);
+        ImmigrationDetail immigrationDetail = new ImmigrationDetail();
+        immigrationDetail.setEmployee(employeeService.getEmployeeById(empId));
         model.addAttribute("empId", empId);
-        model.addAttribute("immigrationDetails", new ImmigrationDetail());
-        model.addAttribute("immigrationDetailsSummary", immigrationDetailsList);
+        model.addAttribute("immigrationDetails", immigrationDetail);
         return "staff/immigrationDetails";
     }
 
     @PostMapping("/immiDetails")
     public String submitImmigrationDetails(
-            @ModelAttribute("clientDetails") ImmigrationDetail immigrationDetails, BindingResult result,
+            @ModelAttribute("immigrationDetails") ImmigrationDetail immigrationDetails, BindingResult result,
             SessionStatus status, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
         log.info("Inside immigrationDetails method of EmployeeDetails Controller:: immigrationDetailsId: " + immigrationDetails.getImmiDetailsId());
         Employee employee = (Employee) session.getAttribute("user");
@@ -213,12 +213,12 @@ public class EmployeeDetailsController {
         } catch (Exception ex) {
             log.error("Exception while saving Immigration details: " + ex);
             model.addAttribute("css", "danger");
-            model.addAttribute("msg", "Technical issue while saving the Client information. " +
+            model.addAttribute("msg", "Technical issue while saving the Immigration Details. " +
                     "Please contact Admin for more information!!");
             throw new CustomException("");
         }
         log.info("Successfully saved the Client Details information!!!");
-        redirectAttributes.addFlashAttribute("msg", "You have successfully updated Employee Details.");
+        redirectAttributes.addFlashAttribute("msg", "You have successfully updated Immigration Details.");
         redirectAttributes.addFlashAttribute("css", "success");
 
         return "redirect:/immiDetails?empId=" + immigrationDetails.getEmployee().getEmployeeId();

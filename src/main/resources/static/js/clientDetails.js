@@ -1,9 +1,11 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
-    $('.phone_us').mask('(000)000-0000');
+    //$('.phone_us').mask('(000)000-0000');
 
-    $('.datepicker').datepicker();
+    fetchClientData();
+    $('#viewClientDetailsDiv').hide();
 
+    /*$('.datepicker').datepicker();
     $('.date_format').datetimepicker({
         sideBySide: true, keepOpen: false, useCurrent: false, format: 'MM/DD/YYYY',
         icons: {
@@ -14,64 +16,117 @@ $(document).ready(function () {
             previous: 'fa fa-chevron-left',
             next: 'fa fa-chevron-right'
         }
-    });
-
+    });*/
 });
 
-/* Datatable component */
-function fetchSummary(clientDetailsSummary) {
-    var summaryTitles = [
-        {"sTitle": "Client Name", "type": "natural-nohtml", "targets": "0"},
-        {"sTitle": "Client Address"},
-        {"sTitle": "Contract Period"},
-        {"sTitle": "Contract Company"},
-        {"sTitle": "Vendor Company"},
-        {"sTitle": "Vendor Contact"}
-    ];
+/**
+ * Retrieve Client Details Summary from the database and populate the datatable with corresponding columns.
+ *
+ */
+function fetchClientData() {
 
-    var columnDefs = [{"className": "dt-center", "targets": "_all"}];
-    console.time("Datatable Creation");
-    var dataSet = [];
+    var empId = $('#employeeId').val();
 
-    if (clientDetailsSummary.length !== 0) {
-        $.each(clientDetailsSummary, function (index, clientDetails) {
-            var dataRow = [];
-            dataRow.push("<a href=\"/employeeManagement/registration/viewEdit?clientDetailsId=" + clientDetails.clientDetailsId
-                + "\" target=\"_blank\" class=\"btn btn-link\">" + clientDetails.clientName + "</a>");
-            dataRow.push((clientDetails.clientStreet || '') + ' '
-                + (clientDetails.clientAddress || '') + ' '
-                + (clientDetails.clientCity || '') + ' '
-                + (clientDetails.clientState || '')
-                + (clientDetails.clientZip));
-            dataRow.push((clientDetails.contractStartDate) + ' - ' + (clientDetails.contractEndDate));
-            dataRow.push(contractCompany);
-            dataRow.push(vendorCompany);
-            dataRow.push(vendorContactName);
-            dataSet.push(dataRow);
-        });
-        setSummaryTable(dataSet, summaryTitles, columnDefs);
-    } else {
-        console.info("No Data Found");
-        setSummaryTable(dataSet, summaryTitles, columnDefs);
-    }
-    console.timeEnd("Datatable Creation");
-}
-
-//Datatable creation
-function setSummaryTable(summaryData, titleData, columndef) {
     if ($.fn.dataTable.isDataTable('#clientDetailsSummary')) {
         // Table Already Exists - dispose it and recreate.
         var table = $('#clientDetailsSummary').DataTable();
         table.destroy();
     }
-    var dataTable;
-    dataTable = $('#clientDetailsSummary').DataTable({
-        buttons: ['pdf', 'excel'],
-        aaSorting: [],
-        columnDefs: columndef,
-        fixedColumns: true,
-        data: summaryData,
+
+    var table = $('#clientDetailsSummary').DataTable({
+        ajax: {
+            url: '/employeeManagement/api/clientDetailsSummary?empId=' + empId,
+            dataSrc: ''
+        },
         dom: 'lBfrtip',
-        aoColumns: titleData
+        buttons: [
+            'excel'
+        ],
+        columns: [
+            {
+                data: 'clientName'
+            },
+            {
+                data: 'clientAddress'
+            },
+            {
+                data: 'contractStartDate',
+                mRender: function (data) {
+                    return moment(data).format("MM/DD/YYYY");
+                }
+            },
+            {
+                data: 'contractEndDate',
+                mRender: function (data) {
+                    return moment(data).format("MM/DD/YYYY");
+                }
+            },
+            {
+                data: 'contractCompany'
+            },
+            {
+                data: 'vendorCompany'
+            },
+            {
+                data: 'vendorContactName'
+            },
+            {
+                data: 'clientDetailsId',
+                mRender: function (data, type, row) {
+                    var link = '';
+                    link = '<button class="btn-link" onclick="getClientDetailById(' + data + ', false)">View</button>';
+                    return link;
+                }
+            }
+        ],
+        order: [[0, 'desc'], [2, 'desc']]
+    })
+}
+
+/**
+ * Retrieve Client Details information based on given clientDetailsId and populate the View Client Details fields on the Client Details page.
+ * @param clientDetailsId
+ */
+function getClientDetailById(clientDetailsId) {
+    console.log("Inside getClientDetailById method:: clientDetailsId: " + clientDetailsId);
+    $.ajax({
+        type: 'GET',
+        url: '/employeeManagement/api/clientDetailById?clientDetailsId=' + clientDetailsId,
+        success: function (responsedata) {
+            console.log("Inside success function after getting the Client Details information.");
+            populateClientDetail(responsedata);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            console.log(jqXHR);
+        }
     });
+}
+
+/**
+ * Populates the Client Detail Information into the View Client Detail fields from the returned clientDetailObj.
+ * @param clientDetailObj
+ */
+function populateClientDetail(clientDetailObj) {
+    $('#viewClientDetailsDiv').show();
+    console.log("Inside populate Client Detail method ::");
+    $('#clientDetailsId').val(clientDetailObj.clientDetailsId);
+    $('#clientName').val(clientDetailObj.clientName);
+    $('#clientStreet').val(clientDetailObj.clientStreet);
+    $('#clientCity').val(clientDetailObj.clientCity);
+    $('#clientState').val(clientDetailObj.clientState);
+    $('#clientZip').val(clientDetailObj.clientZip);
+    $('#contractCompany').val(clientDetailObj.contractCompany);
+    $('#vendorCompany').val(clientDetailObj.vendorCompany);
+    $('#contractStartDate').val(moment(clientDetailObj.contractStartDate).format("MM/DD/YYYY"));
+    $('#contractEndDate').val(moment(clientDetailObj.contractEndDate).format("MM/DD/YYYY"));
+    $('#vendorContactName').val(clientDetailObj.vendorContactName);
+    $('#vendorPhone').val(clientDetailObj.vendorPhone);
+    $('#vendorEmail').val(clientDetailObj.vendorEmail);
+    $('#paymentTerms').val(clientDetailObj.paymentTerms);
+    $('#invoiceContactName').val(clientDetailObj.invoiceContactName);
+    $('#invoiceContactPhone').val(clientDetailObj.invoiceContactPhone);
+    $('#invoiceContactEmail').val(clientDetailObj.invoiceContactEmail);
+    $('#invoiceFrequency').val(clientDetailObj.invoiceFrequency);
+    $('#comments').val(clientDetailObj.comments);
 }

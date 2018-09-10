@@ -83,6 +83,7 @@
                     <section class="row">
                         <div id="accordionClientDetails">
                             <div class="card">
+
                                 <div class="card-header panel-title" id="headingTwo">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -91,7 +92,7 @@
                                                 <a class="card-link" data-toggle="collapse"
                                                    href="#collapseClientDetails"
                                                    aria-expanded="true" aria-controls="collapseClientDetails">
-                                                    Project Details &nbsp;&nbsp;
+                                                    Client Details &nbsp;&nbsp;
                                                     <i class="fa" aria-hidden="true"></i>
                                                 </a>
                                             </h5>
@@ -104,7 +105,7 @@
 
                                     <div class="card-body">
                                         <br>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" id="viewClientDetailsDiv">
                                             <c:if test="${not empty msg}">
                                                 <div class="col-md-12">
                                                     <div class="alert alert-${css} alert-dismissible" role="alert">
@@ -112,7 +113,8 @@
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">X</span>
                                                         </button>
-                                                        <i class="fa fa-info-circle faa-flash animated"></i><strong> ${msg}</strong>
+                                                        <i class="fa fa-info-circle faa-flash animated"></i>
+                                                        <strong> ${msg}</strong>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -121,8 +123,9 @@
                                             <form:form method="POST" modelAttribute="clientDetails"
                                                        action="${clientDetailsActionUrl}">
 
-                                                <form:hidden path="clientDetailsId"/>
-                                                <form:hidden path="employee.employeeId"/>
+                                                <form:hidden id="clientDetailsId" path="clientDetailsId"/>
+                                                <input type="hidden" id="employeeId" name="employee.employeeId"
+                                                       value="${empId}">
 
                                                 <div class="row">
 
@@ -144,19 +147,19 @@
                                                         </div>
                                                     </spring:bind>
 
-                                                    <spring:bind path="clientAddress">
+                                                    <spring:bind path="clientStreet">
                                                         <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
-                                                            <label class="form-control-label" for="clientAddress">Client
+                                                            <label class="form-control-label" for="clientStreet">Client
                                                                 Address</label>
                                                             <div class="inputGroupContainer">
-                                                                <form:input path="clientAddress"
-                                                                            maxlength="100" id="clientAddress"
+                                                                <form:input path="clientStreet"
+                                                                            maxlength="100" id="clientStreet"
                                                                             placeholder="Client Address"
                                                                             data-toggle="tooltip"
                                                                             data-animation="false"
                                                                             class="form-control ${status.error ? 'form-control-danger' : ''}"/>
                                                                 <div class="form-control-feedback">
-                                                                    <form:errors path="clientAddress"/>
+                                                                    <form:errors path="clientStreet"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -322,7 +325,7 @@
                                                             <label class="form-control-label" for="vendorPhone">Vendor
                                                                 Phone</label>
                                                             <div class="inputGroupContainer">
-                                                                <form:input path="vendorPhone" id="contractEndDate"
+                                                                <form:input path="vendorPhone" id="vendorPhone"
                                                                             data-toggle="tooltip" data-animation="false"
                                                                             class="form-control phone_us ${status.error ? 'form-control-danger' : ''}"/>
                                                                 <div class="form-control-feedback">
@@ -337,7 +340,7 @@
                                                             <label class="form-control-label" for="vendorEmail">Vendor
                                                                 Email</label>
                                                             <div class="inputGroupContainer">
-                                                                <form:input path="vendorEmail" id="contractEndDate"
+                                                                <form:input path="vendorEmail" id="vendorEmail"
                                                                             data-toggle="tooltip" data-animation="false"
                                                                             class="form-control ${status.error ? 'form-control-danger' : ''}"/>
                                                                 <div class="form-control-feedback">
@@ -461,26 +464,35 @@
                                                 </div>
 
                                             </form:form>
-                                            <hr>
+                                        </div>
+                                        <hr>
+                                        <div class="col-md-12">
                                             <h4 class="subheading">
                                                 Client Details Summary
                                             </h4>
+                                            <br>
+                                            <div>
+                                                <p>Below are the list of Client Details. </p>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table id="clientDetailsSummary"
-                                                       class="table table-striped table-bordered order-column row-border text-center"
-                                                       data-page-length='10' width="100%">
-                                                    <thead class="text-center table-header"
-                                                           style="color: white">
-                                                    <th>Client Name</th>
-                                                    <th>Client Address</th>
-                                                    <th>Contract Company</th>
-                                                    <th>Contract Period</th>
-                                                    <th>Vendor Company</th>
-                                                    <th>Vendor Contact</th>
-                                                    <th>View</th>
+                                                       class="table table-striped table-bordered"
+                                                       cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Client Name</th>
+                                                        <th>Client Address</th>
+                                                        <th>Contract Start</th>
+                                                        <th>Contract End</th>
+                                                        <th>Contract Company</th>
+                                                        <th>Vendor Company</th>
+                                                        <th>Vendor Contact</th>
+                                                        <th>View</th>
+                                                    </tr>
                                                     </thead>
                                                 </table>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -517,7 +529,6 @@
 <script src="./js/external/pdfmake.min.js"></script>
 <script src="./js/external/vfs_fonts.js"></script>
 <script src="./js/external/buttons.html5.min.js"></script>
-<script src="./js/external/custom.js"></script>
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/clientDetails.js"></script>
 

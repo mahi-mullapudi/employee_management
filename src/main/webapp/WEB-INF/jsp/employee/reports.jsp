@@ -319,7 +319,7 @@
 <script src="./js/external/easypiechart.js"></script>
 <script src="./js/external/easypiechart-data.js"></script>
 <script src="./js/external/bootstrap-datetimepicker.min.js"></script>
-<script src="./js/external/custom.js"></script>
+
 <script>
     window.onload = function () {
         var chart1 = document.getElementById("line-chart").getContext("2d");

@@ -2,6 +2,7 @@ package com.tutorialq.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -23,7 +24,6 @@ public class ClientDetail extends AuditModel implements Serializable {
     private long clientDetailsId;
     private String clientName; //Name of the Client.
     private String clientStreet;
-    private String clientAddress;//Address of the Client.
     private String clientCity;
     private String clientState;
     private String clientZip;
@@ -54,5 +54,14 @@ public class ClientDetail extends AuditModel implements Serializable {
     private String nameCreated;
     private String nameLastModified;
     private String nameApproved;
+    @Transient
+    private String clientAddress;//Address of the Client.
+
+    public String getClientAddress() {
+        return (StringUtils.isNotBlank(this.clientStreet) ? (this.clientStreet + " ") : "")
+                + (StringUtils.isNotBlank(this.clientCity) ? (this.clientCity + " ") : "")
+                + (StringUtils.isNotBlank(this.clientState) ? (this.clientState + " ") : "")
+                + (StringUtils.isNotBlank(this.clientZip) ? (this.clientZip + " ") : "");
+    }
 
 }

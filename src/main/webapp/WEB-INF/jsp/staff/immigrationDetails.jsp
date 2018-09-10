@@ -104,7 +104,7 @@
 
                                     <div class="card-body">
                                         <br>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" id="viewImmigrationDetailsDiv">
                                             <c:if test="${not empty msg}">
                                                 <div class="col-md-12">
                                                     <div class="alert alert-${css} alert-dismissible" role="alert">
@@ -180,6 +180,21 @@
                                                         </div>
                                                     </spring:bind>
 
+                                                    <spring:bind path="currentWage">
+                                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                            <label class="form-control-label" for="currentWage">Current
+                                                                Wage</label>
+                                                            <div class="inputGroupContainer">
+                                                                <form:input path="currentWage" id="currentWage"
+                                                                            data-toggle="tooltip" data-animation="false"
+                                                                            class="form-control ${status.error ? 'form-control-danger' : ''}"/>
+                                                                <div class="form-control-feedback">
+                                                                    <form:errors path="currentWage"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </spring:bind>
+
                                                     <spring:bind path="startDate">
                                                         <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
                                                             <label class="form-control-label" for="startDate">Start
@@ -210,20 +225,6 @@
                                                         </div>
                                                     </spring:bind>
 
-                                                    <spring:bind path="currentWage">
-                                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
-                                                            <label class="form-control-label" for="currentWage">Current
-                                                                Wage</label>
-                                                            <div class="inputGroupContainer">
-                                                                <form:input path="currentWage" id="currentWage"
-                                                                            data-toggle="tooltip" data-animation="false"
-                                                                            class="form-control ${status.error ? 'form-control-danger' : ''}"/>
-                                                                <div class="form-control-feedback">
-                                                                    <form:errors path="currentWage"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </spring:bind>
                                                 </div>
 
                                                 <div class="d-flex justify-content-around">
@@ -235,12 +236,14 @@
                                                 </div>
 
                                             </form:form>
-                                            <hr>
+                                        </div>
+                                        <hr>
+                                        <div class="col-md-12">
                                             <h4 class="subheading">
                                                 Immigration Details Summary
                                             </h4>
                                             <div class="table-responsive">
-                                                <table id="immigrationDetails"
+                                                <table id="immigrationDetailsSummary"
                                                        class="table table-striped table-bordered"
                                                        cellspacing="0" width="100%">
                                                     <thead>
@@ -291,7 +294,6 @@
 <script src="./js/external/pdfmake.min.js"></script>
 <script src="./js/external/vfs_fonts.js"></script>
 <script src="./js/external/buttons.html5.min.js"></script>
-<script src="./js/external/custom.js"></script>
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/immiDetails.js"></script>
 

@@ -396,7 +396,6 @@
         crossorigin="anonymous"></script>
 <script src="./js/external/bootstrap.min.js"></script>
 <script src="./js/external/bootstrap-datetimepicker.min.js"></script>
-<script src="./js/external/custom.js"></script>
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/addTimesheet.js"></script>
 </body>

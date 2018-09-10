@@ -127,7 +127,7 @@
 <script src="./js/external/pdfmake.min.js"></script>
 <script src="./js/external/vfs_fonts.js"></script>
 <script src="./js/external/buttons.html5.min.js"></script>
-<script src="./js/external/custom.js"></script>
+
 <script src="./js/external/moment.min.js"></script>
 <script src="./js/employeeDetailsSummary.js"></script>
 

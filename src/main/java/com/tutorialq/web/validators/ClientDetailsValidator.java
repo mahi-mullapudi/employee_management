@@ -33,7 +33,7 @@ public class ClientDetailsValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientName", "NotEmpty.clientDetails.clientName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientAddress", "NotEmpty.clientDetails.clientAddress");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientStreet", "NotEmpty.clientDetails.clientAddress");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientCity", "NotEmpty.clientDetails.clientCity");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientState", "NotEmpty.clientDetails.clientState");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientZip", "NotEmpty.clientDetails.confirm.clientZip");
