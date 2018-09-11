@@ -121,7 +121,9 @@
                                             <form:form method="POST" modelAttribute="immigrationDetails"
                                                        action="${immiActionUrl}">
 
-                                                <form:hidden path="immiDetailsId"/>
+                                                <form:hidden id="immiDetailsId" path="immiDetailsId"/>
+                                                <input type="hidden" id="employeeId" name="employee.employeeId"
+                                                       value="${empId}">
                                                 <div class="row">
 
                                                     <spring:bind path="currentStatus">
@@ -252,7 +254,6 @@
                                                         <th>Immigration Status</th>
                                                         <th>Start Date</th>
                                                         <th>End Date</th>
-                                                        <th>Comments</th>
                                                         <th>View</th>
                                                     </tr>
                                                     </thead>

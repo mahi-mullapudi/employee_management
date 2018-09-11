@@ -31,37 +31,27 @@ function fetchImmigrationDetails() {
         ],
         columns: [
             {
-                data: 'clientName'
+                data: 'currentStatus'
             },
             {
-                data: 'clientAddress'
+                data: 'receiptNumber'
             },
             {
-                data: 'contractStartDate',
+                data: 'startDate',
                 mRender: function (data) {
                     return moment(data).format("MM/DD/YYYY");
                 }
             },
             {
-                data: 'contractEndDate',
+                data: 'endDate',
                 mRender: function (data) {
                     return moment(data).format("MM/DD/YYYY");
                 }
             },
             {
-                data: 'contractCompany'
-            },
-            {
-                data: 'vendorCompany'
-            },
-            {
-                data: 'vendorContactName'
-            },
-            {
-                data: 'clientDetailsId',
+                data: 'immiDetailsId',
                 mRender: function (data, type, row) {
-                    var link = '';
-                    link = '<button class="btn-link" onclick="getImmigrationDetailById(' + data + ', false)">View</button>';
+                    var link = '<button class="btn-link" onclick="getImmigrationDetailById(' + data + ', false)">View</button>';
                     return link;
                 }
             }
@@ -92,28 +82,16 @@ function getImmigrationDetailById(immigrationDetailId) {
 
 /**
  * Populates the Immigration Detail Information into the View Immigration Detail fields from the returned immigrationDetailObj.
- * @param clientDetailObj
+ * @param immigrationDetailObj
  */
 function populateImmigrationDetails(immigrationDetailObj) {
     $('#viewImmigrationDetailsDiv').show();
     console.log("Inside populate Client Detail method ::");
-    $('#clientDetailsId').val(clientDetailObj.clientDetailsId);
-    $('#clientName').val(clientDetailObj.clientName);
-    $('#clientStreet').val(clientDetailObj.clientStreet);
-    $('#clientCity').val(clientDetailObj.clientCity);
-    $('#clientState').val(clientDetailObj.clientState);
-    $('#clientZip').val(clientDetailObj.clientZip);
-    $('#contractCompany').val(clientDetailObj.contractCompany);
-    $('#vendorCompany').val(clientDetailObj.vendorCompany);
-    $('#contractStartDate').val(moment(clientDetailObj.contractStartDate).format("MM/DD/YYYY"));
-    $('#contractEndDate').val(moment(clientDetailObj.contractEndDate).format("MM/DD/YYYY"));
-    $('#vendorContactName').val(clientDetailObj.vendorContactName);
-    $('#vendorPhone').val(clientDetailObj.vendorPhone);
-    $('#vendorEmail').val(clientDetailObj.vendorEmail);
-    $('#paymentTerms').val(clientDetailObj.paymentTerms);
-    $('#invoiceContactName').val(clientDetailObj.invoiceContactName);
-    $('#invoiceContactPhone').val(clientDetailObj.invoiceContactPhone);
-    $('#invoiceContactEmail').val(clientDetailObj.invoiceContactEmail);
-    $('#invoiceFrequency').val(clientDetailObj.invoiceFrequency);
-    $('#comments').val(clientDetailObj.comments);
+    $('#immiDetailsId').val(immigrationDetailObj.immiDetailsId);
+    $('#currentStatus').val(immigrationDetailObj.currentStatus);
+    $('#receiptNumber').val(immigrationDetailObj.receiptNumber);
+    $('#lcaNumber').val(immigrationDetailObj.lcaNumber);
+    $('#currentWage').val(immigrationDetailObj.currentWage);
+    $('#startDate').val(moment(immigrationDetailObj.startDate).format("MM/DD/YYYY"));
+    $('#endDate').val(moment(immigrationDetailObj.endDate).format("MM/DD/YYYY"));
 }
