@@ -127,7 +127,7 @@
                                                 <div class="row">
 
                                                     <spring:bind path="currentStatus">
-                                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''} snears-vendor-info">
+                                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''} snears-vendor-info">
                                                             <label class="form-control-label" for="currentStatus">Current
                                                                 Status</label>
                                                             <div class="inputGroupContainer">
@@ -137,7 +137,8 @@
                                                                              data-animation="false"
                                                                              class="form-control ${status.error ? 'form-control-danger' : ''}"
                                                                              id="currentStatus">
-                                                                    <form:option value="" label=""/>
+                                                                    <form:option value="" label="---SELECT---"/>
+                                                                    <form:options items="${immiStatusMap}"/>
                                                                 </form:select>
                                                                 <div class="form-control-feedback">
                                                                     <form:errors path="currentStatus"/>
@@ -153,7 +154,7 @@
                                                             <div class="inputGroupContainer">
                                                                 <form:input path="receiptNumber" maxlength="100"
                                                                             id="receiptNumber"
-                                                                            placeholder="Client Address"
+                                                                            placeholder="Receipt Number"
                                                                             data-toggle="tooltip"
                                                                             data-animation="false"
                                                                             class="form-control ${status.error ? 'form-control-danger' : ''}"/>
@@ -183,7 +184,7 @@
                                                     </spring:bind>
 
                                                     <spring:bind path="currentWage">
-                                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
                                                             <label class="form-control-label" for="currentWage">Current
                                                                 Wage</label>
                                                             <div class="inputGroupContainer">
@@ -198,7 +199,7 @@
                                                     </spring:bind>
 
                                                     <spring:bind path="startDate">
-                                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
                                                             <label class="form-control-label" for="startDate">Start
                                                                 Date</label>
                                                             <div class="inputGroupContainer">
@@ -213,7 +214,7 @@
                                                     </spring:bind>
 
                                                     <spring:bind path="endDate">
-                                                        <div class="form-group col-md-6 ${status.error ? 'has-danger' : ''}">
+                                                        <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''}">
                                                             <label class="form-control-label" for="endDate">End
                                                                 Date</label>
                                                             <div class="inputGroupContainer">

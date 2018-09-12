@@ -249,4 +249,9 @@ public class EmployeeDetailsController {
         return ApplicationConstants.invoiceFrequencyMap;
     }
 
+    @ModelAttribute("immiStatusMap")
+    public Map<String, String> immigrtationStatusMap() {
+        return ApplicationConstants.immiStatusMap;
+    }
+
 }

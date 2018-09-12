@@ -104,4 +104,12 @@ public class ApplicationConstants implements Serializable {
             .put("monthly", "Monthly")
             .build();
 
+    public static final Map<String, String> immiStatusMap = ImmutableMap.<String, String>builder()
+            .put("CPT", "CPT")
+            .put("OPT", "OPT")
+            .put("H1B", "H1B")
+            .put("GREENCARD", "GREENCARD")
+            .put("CITIZEN", "CITIZEN")
+            .build();
+
 }
