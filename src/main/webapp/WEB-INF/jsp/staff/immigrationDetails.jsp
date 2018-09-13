@@ -23,7 +23,7 @@
     <link href="./css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="hideImmiDiv(${showDivFlag})">
 <div class="container-fluid" id="wrapper">
     <div class="row">
         <jsp:include page="../sideNavbar.jsp"/>
@@ -60,7 +60,7 @@
                 <div class="clear"></div>
             </header>
 
-            <ul class="nav nav-pills nav-fill">
+            <ul class="nav nav-pills nav-fill col-lg-11 col-md-12">
                 <li class="nav-item">
                     <a class="nav-link" href="/employeeManagement/employeeDetails?empId=${empId}">
                         Personal Details
@@ -81,7 +81,7 @@
             <section class="row">
                 <div class="col-lg-11 col-md-12">
                     <section class="row">
-                        <div id="accordionImmiDetails">
+                        <div id="accordionImmiDetails" class="col-sm-12">
                             <div class="card">
                                 <div class="card-header panel-title" id="headingThree">
                                     <div class="row">
@@ -104,6 +104,18 @@
 
                                     <div class="card-body">
                                         <br>
+                                        <div class="col-md-12 row">
+                                            <div class="col-md-12 col-lg-8">
+                                                <p>Click on the button to add new Immigration Information.</p>
+                                            </div>
+                                            <div class="col-md-12 col-lg-4">
+                                                <a id="addImmiLink" class="btn btn-sm btn-success"
+                                                   onclick="addImmigrationDetails()">
+                                                    Add Immigration Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr>
                                         <div class="col-md-12" id="viewImmigrationDetailsDiv">
                                             <c:if test="${not empty msg}">
                                                 <div class="col-md-12">
@@ -112,7 +124,8 @@
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">X</span>
                                                         </button>
-                                                        <i class="fa fa-info-circle faa-flash animated"></i><strong> ${msg}</strong>
+                                                        <i class="fa fa-info-circle faa-flash animated"></i>
+                                                        <strong> ${msg}</strong>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -125,7 +138,6 @@
                                                 <input type="hidden" id="employeeId" name="employee.employeeId"
                                                        value="${empId}">
                                                 <div class="row">
-
                                                     <spring:bind path="currentStatus">
                                                         <div class="form-group required col-md-6 ${status.error ? 'has-danger' : ''} snears-vendor-info">
                                                             <label class="form-control-label" for="currentStatus">Current
@@ -227,7 +239,6 @@
                                                             </div>
                                                         </div>
                                                     </spring:bind>
-
                                                 </div>
 
                                                 <div class="d-flex justify-content-around">

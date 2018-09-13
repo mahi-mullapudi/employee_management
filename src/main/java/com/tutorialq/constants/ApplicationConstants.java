@@ -99,9 +99,9 @@ public class ApplicationConstants implements Serializable {
             .build();
 
     public static final Map<String, String> invoiceFrequencyMap = ImmutableMap.<String, String>builder()
-            .put("weekly", "Weekly")
-            .put("biweekly", "Bi-weekly")
-            .put("monthly", "Monthly")
+            .put(TIMESHEET_TYPE_WEEKLY, TIMESHEET_TYPE_WEEKLY)
+            .put(TIMESHEET_TYPE_BIWEEKLY, TIMESHEET_TYPE_BIWEEKLY)
+            .put(TIMESHEET_TYPE_MONTHLY, TIMESHEET_TYPE_MONTHLY)
             .build();
 
     public static final Map<String, String> immiStatusMap = ImmutableMap.<String, String>builder()

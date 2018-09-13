@@ -60,7 +60,7 @@
                 <div class="clear"></div>
             </header>
 
-            <ul class="nav nav-pills nav-fill">
+            <ul class="nav nav-pills nav-fill col-lg-11 col-md-12">
                 <li class="nav-item">
                     <a class="nav-link active" href="/employeeManagement/employeeDetails?empId=${empId}">
                         Personal Details
@@ -81,7 +81,7 @@
             <section class="row">
                 <div class="col-lg-11 col-md-12">
                     <section class="row">
-                        <div id="accordionEmployeeDetails">
+                        <div id="accordionEmployeeDetails" class="col-sm-12">
                             <div class="card">
                                 <div class="card-header panel-title" id="headingOne">
                                     <div class="row">

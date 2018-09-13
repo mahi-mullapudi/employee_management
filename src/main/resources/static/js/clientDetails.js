@@ -3,7 +3,6 @@ $(document).ready(function () {
     //$('.phone_us').mask('(000)000-0000');
 
     fetchClientData();
-    $('#viewClientDetailsDiv').hide();
 
     /*$('.datepicker').datepicker();
     $('.date_format').datetimepicker({
@@ -18,6 +17,10 @@ $(document).ready(function () {
         }
     });*/
 });
+
+function hideClientDetailsDiv(showFlag) {
+    if (!showFlag) $('#viewClientDetailsDiv').hide();
+}
 
 /**
  * Retrieve Client Details Summary from the database and populate the datatable with corresponding columns.
@@ -129,4 +132,30 @@ function populateClientDetail(clientDetailObj) {
     $('#invoiceContactEmail').val(clientDetailObj.invoiceContactEmail);
     $('#invoiceFrequency').val(clientDetailObj.invoiceFrequency);
     $('#comments').val(clientDetailObj.comments);
+}
+
+/**
+ * Add Immigration Details by clearing the existing Immigration information.
+ */
+function addClientDetails() {
+    $('#viewClientDetailsDiv').show();
+    $('#clientDetailsId').val(0);
+    $('#clientName').val('');
+    $('#clientStreet').val('');
+    $('#clientCity').val('');
+    $('#clientState').val('');
+    $('#clientZip').val('');
+    $('#contractCompany').val('');
+    $('#vendorCompany').val('');
+    $('#contractStartDate').val('');
+    $('#contractEndDate').val('');
+    $('#vendorContactName').val('');
+    $('#vendorPhone').val('');
+    $('#vendorEmail').val('');
+    $('#paymentTerms').val('');
+    $('#invoiceContactName').val('');
+    $('#invoiceContactPhone').val('');
+    $('#invoiceContactEmail').val('');
+    $('#invoiceFrequency').val('');
+    $('#comments').val('');
 }

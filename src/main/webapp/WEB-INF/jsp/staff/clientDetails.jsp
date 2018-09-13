@@ -23,7 +23,7 @@
     <link href="./css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="hideClientDetailsDiv(${showDivFlag})">
 <div class="container-fluid" id="wrapper">
     <div class="row">
         <jsp:include page="../sideNavbar.jsp"/>
@@ -60,7 +60,7 @@
                 <div class="clear"></div>
             </header>
 
-            <ul class="nav nav-pills nav-fill">
+            <ul class="nav nav-pills nav-fill col-lg-11 col-md-12">
                 <li class="nav-item">
                     <a class="nav-link" href="/employeeManagement/employeeDetails?empId=${empId}">
                         Personal Details
@@ -81,7 +81,7 @@
             <section class="row">
                 <div class="col-lg-11 col-md-12">
                     <section class="row">
-                        <div id="accordionClientDetails">
+                        <div id="accordionClientDetails" class="col-sm-12">
                             <div class="card">
 
                                 <div class="card-header panel-title" id="headingTwo">
@@ -105,6 +105,18 @@
 
                                     <div class="card-body">
                                         <br>
+                                        <div class="col-md-12 row">
+                                            <div class="col-md-12 col-lg-8">
+                                                <p>Click on the button to add new Client Information.</p>
+                                            </div>
+                                            <div class="col-md-12 col-lg-4">
+                                                <a id="addImmiLink" class="btn btn-sm btn-success"
+                                                   onclick="addClientDetails()">
+                                                    Add Client Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr>
                                         <div class="col-md-12" id="viewClientDetailsDiv">
                                             <c:if test="${not empty msg}">
                                                 <div class="col-md-12">

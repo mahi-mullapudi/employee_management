@@ -3,8 +3,11 @@ $(document).ready(function () {
     //$('.phone_us').mask('(000)000-0000');
 
     fetchImmigrationDetails();
-    $('#viewImmigrationDetailsDiv').hide();
 });
+
+function hideImmiDiv(showFlag) {
+    if (!showFlag) $('#viewImmigrationDetailsDiv').hide();
+}
 
 /**
  * Retrieve Immigration Details Summary from the database and populate the datatable with corresponding columns.
@@ -94,4 +97,18 @@ function populateImmigrationDetails(immigrationDetailObj) {
     $('#currentWage').val(immigrationDetailObj.currentWage);
     $('#startDate').val(moment(immigrationDetailObj.startDate).format("MM/DD/YYYY"));
     $('#endDate').val(moment(immigrationDetailObj.endDate).format("MM/DD/YYYY"));
+}
+
+/**
+ * Add Immigration Details by clearing the existing Immigration information.
+ */
+function addImmigrationDetails() {
+    $('#viewImmigrationDetailsDiv').show();
+    $('#immiDetailsId').val(0);
+    $('#currentStatus').val('');
+    $('#receiptNumber').val('');
+    $('#lcaNumber').val('');
+    $('#currentWage').val(0.0);
+    $('#startDate').val('');
+    $('#endDate').val('');
 }

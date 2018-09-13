@@ -146,6 +146,8 @@ public class EmployeeDetailsController {
         clientDetailsValidator.validate(clientDetails, result);
         if (result.hasErrors()) {
             log.warn("Validation errors: " + result.toString());
+            model.addAttribute("showDivFlag", true);
+            model.addAttribute("empId", clientDetails.getEmployee().getEmployeeId());
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Invalid / Missing Information. Please correct the Client details information below!!");
             return "staff/clientDetails";
@@ -202,6 +204,8 @@ public class EmployeeDetailsController {
         }
         immigrationDetailsValidator.validate(immigrationDetails, result);
         if (result.hasErrors()) {
+            model.addAttribute("showDivFlag", true);
+            model.addAttribute("empId", immigrationDetails.getEmployee().getEmployeeId());
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "Invalid / Missing Information. Please correct the information entered below!!");
             return "staff/immigrationDetails";
